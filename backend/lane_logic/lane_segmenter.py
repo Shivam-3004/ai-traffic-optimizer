@@ -78,7 +78,7 @@ def update_tracks(detections):
 
 # MAIN LOOP (Integration with Detection)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     cap = cv2.VideoCapture("traffic.mp4")  # Change to 0 for webcam
 
     while True:
