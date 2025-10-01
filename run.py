@@ -13,7 +13,7 @@ from backend.lane_logic.lane_segmenter import map_to_lanes         # Member 3
 from backend.logic.signal_controller import decide_signal          # Member 2
 
 # Import real-time frame capture module
-from backend.video_input.live_capture import get_live_frame        # Shivam's module
+from backend.video_input.live_capture import get_live_frame        # live capture module
 
 # ------------------------------------------------------------
 # Step 1: Capture live frame from webcam
