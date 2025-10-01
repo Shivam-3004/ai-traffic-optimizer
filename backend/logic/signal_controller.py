@@ -198,6 +198,36 @@ class decide_signal:
         # Save updated list back to file
         with open(self.log_file, "w") as f:
             json.dump(logs, f, indent=2)
+        
+    def _format_output(self, served_lane, green_time, counts):
+        """Return a dict with status, time, count, density for each lane."""
+
+        output = {}
+        for i, (lane, count) in enumerate(counts.items(), start=1):
+            if lane == served_lane:
+                status = "Green"
+                time = int(green_time)
+            else:
+                status = "Red"
+                time = int(green_time * 2)  # arbitrary, adjust if needed
+
+            # density classification
+            if count > 10:
+                density = "High"
+            elif count > 5:
+                density = "Medium"
+            else:
+                density = "Low"
+
+            output[f"Lane {i}"] = {
+                "status": status,
+                "time": time,
+                "count": count,
+                "density": density,
+            }
+
+        return output
+
 
     def run_loop(self, poll_counts_fn, update_ui_fn=None, stop_after_cycles=None):
         cycles = 0
