@@ -1,0 +1,19 @@
+names:
+- Ambulance
+- Auto-Rickshaw
+- Bike
+- Bus
+- Car
+- HCV
+- LCV
+- Toto
+nc: 8
+roboflow:
+  license: CC BY 4.0
+  project: indian_vehicle_detection-44kan
+  url: https://universe.roboflow.com/adityas-workshop-kr2u8/indian_vehicle_detection-44kan/dataset/1
+  version: 1
+  workspace: adityas-workshop-kr2u8
+test: ../test/images
+train: ../train/images
+val: ../valid/images
