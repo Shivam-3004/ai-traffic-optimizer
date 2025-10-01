@@ -83,11 +83,14 @@ class decide_signal:
     def _ensure_logfile(self):
         logdir = os.path.dirname(self.log_file) or "."
         os.makedirs(logdir, exist_ok=True)
-        # create header if file doesn't exist
+
+        # use .json extension instead of .csv
+        self.log_file = self.log_file.replace(".csv", ".json")
+
+        # if file doesn't exist, create an empty array (for JSON logs)
         if not os.path.exists(self.log_file):
-            with open(self.log_file, "w", newline="") as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow(["timestamp", "served_lane", "green_time_s", "counts_json"])
+            with open(self.log_file, "w") as f:
+                f.write("[]")  # start as empty JSON list
 
     def register_lanes(self, lanes):
         """Register lane names (list). Can be called at startup to set lanes."""
@@ -176,46 +179,25 @@ class decide_signal:
     def _log_cycle(self, served_lane, green_time, counts):
         ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # 🔹 build structured output (same style as run_loop)
-        output = {}
-        for i, lane in enumerate(self.lanes, start=1):
-            count = counts.get(lane, 0)
-
-            if count <= 5:
-                density = "Low"
-            elif count <= 12:
-                density = "Medium"
-            else:
-                density = "High"
-
-            if lane == served_lane:
-                status = "Green"
-                time_val = green_time
-            else:
-                status = "Red"
-                time_val = max(green_time, 15)
-
-            output[f"Lane {i}"] = {
-                "status": status,
-                "time": time_val,
-                "count": count,
-                "density": density
-            }
-
-        # overwrite served lane as Yellow phase
-        output[f"Lane {self.lanes.index(served_lane)+1}"]["status"] = "Yellow"
-        output[f"Lane {self.lanes.index(served_lane)+1}"]["time"] = 5
-
-        # 🔹 final JSON record with timestamp
+        # Build the record
         record = {
             "timestamp": ts,
-            "cycle": output
+            "cycle": self._format_output(served_lane, green_time, counts)
         }
 
-        # append JSON object to log file (one JSON object per line)
-        with open(self.log_file.replace(".csv", ".json"), "a") as f:
-            f.write(json.dumps(record, indent=2))
-            f.write("\n")
+        # Load existing logs (if any)
+        try:
+            with open(self.log_file, "r") as f:
+                logs = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            logs = []
+
+        # Append new record
+        logs.append(record)
+
+        # Save updated list back to file
+        with open(self.log_file, "w") as f:
+            json.dump(logs, f, indent=2)
 
     def run_loop(self, poll_counts_fn, update_ui_fn=None, stop_after_cycles=None):
         cycles = 0
