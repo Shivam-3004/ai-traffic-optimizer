@@ -19,7 +19,7 @@ How to integrate:
 
 """
 
-import csv
+import json
 import os
 import time
 from datetime import datetime
@@ -83,11 +83,14 @@ class decide_signal:
     def _ensure_logfile(self):
         logdir = os.path.dirname(self.log_file) or "."
         os.makedirs(logdir, exist_ok=True)
-        # create header if file doesn't exist
+
+        # use .json extension instead of .csv
+        self.log_file = self.log_file.replace(".csv", ".json")
+
+        # if file doesn't exist, create an empty array (for JSON logs)
         if not os.path.exists(self.log_file):
-            with open(self.log_file, "w", newline="") as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow(["timestamp", "served_lane", "green_time_s", "counts_json"])
+            with open(self.log_file, "w") as f:
+                f.write("[]")  # start as empty JSON list
 
     def register_lanes(self, lanes):
         """Register lane names (list). Can be called at startup to set lanes."""
@@ -175,33 +178,106 @@ class decide_signal:
 
     def _log_cycle(self, served_lane, green_time, counts):
         ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        row = [ts, served_lane, f"{green_time:.2f}", str(counts)]
-        with open(self.log_file, "a", newline="") as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(row)
+
+        # Build the record
+        record = {
+            "timestamp": ts,
+            "cycle": self._format_output(served_lane, green_time, counts)
+        }
+
+        # Load existing logs (if any)
+        try:
+            with open(self.log_file, "r") as f:
+                logs = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            logs = []
+
+        # Append new record
+        logs.append(record)
+
+        # Save updated list back to file
+        with open(self.log_file, "w") as f:
+            json.dump(logs, f, indent=2)
+        
+    def _format_output(self, served_lane, green_time, counts):
+        """Return a dict with status, time, count, density for each lane."""
+
+        output = {}
+        for i, (lane, count) in enumerate(counts.items(), start=1):
+            if lane == served_lane:
+                status = "Green"
+                time = int(green_time)
+            else:
+                status = "Red"
+                time = int(green_time * 2)  # arbitrary, adjust if needed
+
+            # density classification
+            if count > 10:
+                density = "High"
+            elif count > 5:
+                density = "Medium"
+            else:
+                density = "Low"
+
+            output[f"Lane {i}"] = {
+                "status": status,
+                "time": time,
+                "count": count,
+                "density": density,
+            }
+
+        return output
+
 
     def run_loop(self, poll_counts_fn, update_ui_fn=None, stop_after_cycles=None):
-        """
-        Blocking loop:
-        - poll_counts_fn: function with no args that returns counts dict {'A':n,...}
-        - update_ui_fn: optional function(update_ui_fn(served_lane, green_time)) to update UI
-        - stop_after_cycles: optional int to stop after N cycles (useful for demo)
-        This loop waits for the green_time (but sleeps in small increments so KeyboardInterrupt is responsive).
-        """
         cycles = 0
         try:
             while True:
                 counts = poll_counts_fn() or {}
                 served, green_time = self.run_once(counts)
-                print(f"[{datetime.now().strftime('%H:%M:%S')}] Serving lane {served} for {green_time:.1f}s | counts={counts}")
 
+                # 🔹 build structured output
+                output = {}
+                for i, lane in enumerate(self.lanes, start=1):
+                    count = counts.get(lane, 0)
+
+                    # classify density
+                    if count <= 5:
+                        density = "Low"
+                    elif count <= 12:
+                        density = "Medium"
+                    else:
+                        density = "High"
+
+                    if lane == served:
+                        status = "Green"
+                        time_val = green_time
+                    else:
+                        status = "Red"
+                        time_val = max(green_time, 15)  # fallback red duration
+
+                    output[f"Lane {i}"] = {
+                        "status": status,
+                        "time": time_val,
+                        "count": count,
+                        "density": density
+                    }
+
+                # 🔹 Add a Yellow transition for the served lane
+                output[f"Lane {self.lanes.index(served)+1}"]["status"] = "Yellow"
+                output[f"Lane {self.lanes.index(served)+1}"]["time"] = 5
+
+                # print JSON-like structured output
+                print(output)
+
+                # 🔹 UI hook (if dashboard exists)
                 if update_ui_fn:
                     try:
                         update_ui_fn(served, green_time)
                     except Exception as e:
                         print("Warning: update_ui_fn error:", e)
 
-                # wait for the green period but be interruptable
+                # wait for green period but allow interruption
                 waited = 0.0
                 step = 0.2
                 while waited < green_time:
@@ -214,6 +290,7 @@ class decide_signal:
                     break
         except KeyboardInterrupt:
             print("Controller loop interrupted by user.")
+
 
 
 # -----------------------
