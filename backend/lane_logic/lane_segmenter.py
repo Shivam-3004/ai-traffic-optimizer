@@ -1,10 +1,9 @@
- 
 """
 Vehicle Counting & Lane Logic Module
 
 - Splits frame into lane regions (A, B, C, D).
-- Uses centroid tracking to avoid double-counting.
-- Maintains lane-wise vehicle counters.
+- Uses centroid tracking to avoid double-counting within a frame.
+- Maintains lane-wise vehicle counters PER FRAME (resets after each frame).
 - Plug in detection results here: detections = [(x,y,w,h), ...]
 """
 
@@ -24,9 +23,6 @@ lanes = {
 
 tracked_objects = {}  # vehicle_id : (centroid, lane)
 next_vehicle_id = 0
-lane_counts = {lane: 0 for lane in lanes}  # counters
-
-
 
 # Helper Functions
 
@@ -48,9 +44,12 @@ def which_lane(cx, cy):
 def update_tracks(detections):
     """
     detections = list of bounding boxes [(x,y,w,h), ...]
-    Updates tracked objects, avoids double counting
+    Updates tracked objects per frame and resets count after every frame.
     """
     global tracked_objects, next_vehicle_id
+
+    #  RESET COUNTS EVERY FRAME
+    lane_counts = {lane: 0 for lane in lanes}
 
     new_tracked = {}
     for (x, y, w, h) in detections:
@@ -64,13 +63,14 @@ def update_tracks(detections):
             if distance.euclidean((cx, cy), old_c) < 30:  # threshold distance
                 new_tracked[obj_id] = ((cx, cy), lane)
                 found = True
+                lane_counts[lane] += 1
                 break
 
         if not found:
             # New vehicle → assign new ID
             next_vehicle_id += 1
             new_tracked[next_vehicle_id] = ((cx, cy), lane)
-            lane_counts[lane] += 1  # count new vehicle
+            lane_counts[lane] += 1
 
     tracked_objects = new_tracked
     return lane_counts
@@ -89,11 +89,11 @@ if __name__ == "__main__":
         # >>> This part must be filled by Detection Member <<<
         # detections = detection_model(frame)
         # Example dummy detections (x,y,w,h):
-        detections = [(60, 120, 40, 40), (320, 150, 50, 50)]  
+        detections = [(60, 120, 40, 40), (320, 150, 50, 50)]
 
-        # Update tracking & lane counts
+        # Update tracking & lane counts PER FRAME
         counts = update_tracks(detections)
-        print("Current Lane Counts:", counts)
+        print("Current Frame Lane Counts:", counts)
 
         # (Optional) Draw ROIs & counts on video frame
         for lane, (x1, y1, x2, y2) in lanes.items():
