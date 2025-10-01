@@ -37,7 +37,7 @@ DEFAULT_CONFIG = {
     "max_time": 60.0,            # absolute maximum green (seconds)
     "control_interval": 8.0,     # how often controller recomputes (seconds)
     "starvation_weight": 0.8,    # boost weight for lanes not recently served
-    "log_file": "logs/traffic_log.csv",
+    "log_file": "logs/traffic_log.json",
     "service_order": "auto"      # 'auto' uses scoring, 'round_robin' uses fixed order
 }
 
@@ -83,9 +83,6 @@ class decide_signal:
     def _ensure_logfile(self):
         logdir = os.path.dirname(self.log_file) or "."
         os.makedirs(logdir, exist_ok=True)
-
-        # use .json extension instead of .csv
-        self.log_file = self.log_file.replace(".csv", ".json")
 
         # if file doesn't exist, create an empty array (for JSON logs)
         if not os.path.exists(self.log_file):
