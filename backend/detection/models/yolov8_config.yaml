@@ -1,10 +1,10 @@
 nc : 8
 names :
-  0: 'Ambulance'
-  1: 'Auto-rickshaw'
-  2: 'Bike'
-  3: 'Bus'
-  4: 'Car'
-  5: 'HCV'
-  6: 'LCV'
-  7: 'Toto'
+  0: 'Auto-rickshaw'
+  1: 'Bike'
+  2: 'Bus'
+  3: 'Car'
+  4: 'HCV'
+  5: 'LCV'
+  6: 'Toto'
+  
