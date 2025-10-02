@@ -75,7 +75,7 @@ class decide_signal:
         self.max_red_wait_high_density = float(self.config.get("max_red_wait_high_density", 35.0))
 
         # Lane bookkeeping
-        self.lanes: List[str] = list(lanes) if lanes else []
+        self.lanes: List[str] = list(lanes) if lanes else ["lane1", "lane2", "lane3", "lane4"]
         now = time.time()
         self.last_served: Dict[str, float] = {lane: now for lane in self.lanes}
         # smoothed counts (EWMA) to avoid jitter

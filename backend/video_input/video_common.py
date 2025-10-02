@@ -1,3 +1,18 @@
+# ✅ Load multiple sampled frames from a video
+def get_sampled_frames(video_path, num_frames=5, stride=30):
+    cap = cv2.VideoCapture(video_path)
+    frames = []
+    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    for i in range(num_frames):
+        frame_idx = i * stride
+        if frame_idx >= total_frames:
+            break
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
+        ret, frame = cap.read()
+        if ret:
+            frames.append(frame)
+    cap.release()
+    return frames
 # ------------------------------------------------------------
 # File: backend/video_input/video_common.py
 # Purpose: Centralized video paths and frame loader

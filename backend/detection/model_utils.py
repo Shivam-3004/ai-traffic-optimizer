@@ -4,10 +4,10 @@ import cv2
 # Lane Definitions (ROIs)
 # -----------------------------
 lanes = {
-    "A": (50, 100, 250, 400),
-    "B": (300, 100, 500, 400),
-    "C": (550, 100, 750, 400),
-    "D": (800, 100, 1000, 400)
+    "lane1": (50, 100, 250, 400),
+    "lane2": (300, 100, 500, 400),
+    "lane3": (550, 100, 750, 400),
+    "lane4": (800, 100, 1000, 400)
 }
 
 # -----------------------------
@@ -33,7 +33,9 @@ DIST_THRESHOLD = 30  # Centroid distance for tracking
 # -----------------------------
 def get_centroid(x, y, w, h):
     """Return centroid of bounding box"""
-    return int(x), int(y)
+    cx = int(x + w / 2)
+    cy = int(y + h / 2)
+    return cx, cy
 
 def which_lane(cx, cy):
     """Check which lane ROI contains centroid"""

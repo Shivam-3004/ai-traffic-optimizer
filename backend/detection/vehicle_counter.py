@@ -1,11 +1,11 @@
 from ultralytics import YOLO
 from scipy.spatial import distance
-from model_utils import get_centroid, which_lane, lanes, vehicle_weights, DIST_THRESHOLD
+from backend.detection.model_utils import get_centroid, which_lane, lanes, vehicle_weights, DIST_THRESHOLD
 
 # Load YOLOv8 model once
 model = YOLO("backend/detection/models/best.pt")
 
-def detect_vehicles(frame):
+def detect_vehicles(frame, model):
     """Run YOLOv8 model on frame and return detections as (x,y,w,h,class_name)"""
     results = model(frame)[0]
     detections = []
