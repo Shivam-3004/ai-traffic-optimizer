@@ -1,5 +1,4 @@
 import cv2
-from scipy.spatial import distance
 
 # -----------------------------
 # Lane Definitions (ROIs)
@@ -24,16 +23,17 @@ vehicle_weights = {
     "Toto": 2,
 }
 
-DIST_THRESHOLD = 30   # centroid distance for tracking
+# -----------------------------
+# Tracking Threshold
+# -----------------------------
+DIST_THRESHOLD = 30  # Centroid distance for tracking
 
 # -----------------------------
 # Helper Functions
 # -----------------------------
 def get_centroid(x, y, w, h):
     """Return centroid of bounding box"""
-    cx = int(x + w / 2)
-    cy = int(y + h / 2)
-    return (cx, cy)
+    return int(x), int(y)
 
 def which_lane(cx, cy):
     """Check which lane ROI contains centroid"""
