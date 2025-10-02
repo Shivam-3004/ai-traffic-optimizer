@@ -1,285 +1,315 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
 """
-signal_controller.py
+Improved signal_controller.py
 
-Signal Control & Timing module for AI Traffic Light Optimizer.
-
-Provides:
-- decide_signal class that:
-  - loads config (or uses defaults)
-  - computes green time per lane (base + factor * vehicle_count)
-  - selects next lane to serve using a fairness/starvation boost
-  - logs every cycle to CSV
-- A simple demo loop when run as __main__ (simulates incoming counts)
-
-How to integrate:
-- Instantiate decide_signal(config_dict_or_path)
-- Call controller.run_once(counts_dict) -> returns (lane, green_time)
-- Or call controller.run_loop(poll_counts_fn, update_ui_fn) for a blocking demo loop.
-
+- decide_signal class (same external API: run_once / run_loop)
+- More realistic defaults (green/yellow/all-red)
+- EWMA smoothing of counts
+- sqrt scaling for green time to avoid runaway durations
+- Append-only CSV logging (much faster than reloading JSON each cycle)
+- Two-phase run_loop (Green then Yellow)
 """
 
-import json
+from __future__ import annotations
 import os
+import json
 import time
-from datetime import datetime
+import math
 import random
-
-try:
-    import yaml
-except Exception:
-    yaml = None
+from datetime import datetime
+from typing import Callable, Dict, Iterable, List, Optional, Tuple
 
 DEFAULT_CONFIG = {
-    "base_time": 8.0,            # minimum base green time (seconds)
-    "factor": 1.5,               # seconds added per detected vehicle
-    "min_time": 5.0,             # absolute minimum green (seconds)
-    "max_time": 60.0,            # absolute maximum green (seconds)
-    "control_interval": 8.0,     # how often controller recomputes (seconds)
-    "starvation_weight": 0.8,    # boost weight for lanes not recently served
+    # Green timing model (realistic defaults for urban/arterial intersections)
+    "base_time": 15.0,         # base green (seconds)
+    "factor": 2.0,             # multiplier for sqrt(vehicle_count)
+    "min_time": 8.0,           # smallest allowed green (seconds)
+    "max_time": 45.0,          # largest allowed green (seconds)
+
+    # Transition / safety times
+    "yellow_time": 4.0,        # yellow interval (seconds)
+    "all_red_time": 1.0,       # short all-red clearance between phases (seconds)
+
+    # Controller behavior
+    "control_interval": 5.0,   # how often controller recalculates (seconds)
+    "starvation_weight": 1.0,  # boost factor for starving lanes
+    "max_starvation_multiplier": 3.0,  # bound the boost so it cannot dominate
+    "service_order": "auto",   # 'auto' or 'round_robin'
+    "smoothing_alpha": 0.4,    # EWMA alpha for smoothing counts (0-1)
+
+    # Logging
     "log_file": "logs/traffic_log.json",
-    "service_order": "auto"      # 'auto' uses scoring, 'round_robin' uses fixed order
+
+    #Parameters to guarantee high-density lanes aren't stuck too long
+    "high_density_threshold": 12,         # smoothed count >= this => "High"
+    "max_red_wait_high_density": 35.0,    # seconds: cap on red wait for high-density lanes
 }
 
 
 class decide_signal:
-    def __init__(self, config=None, lanes=None):
-        """
-        config: dict or path to YAML config. If None uses DEFAULT_CONFIG.
-        lanes: list of lane names (e.g., ['A','B','C','D']). If None, lanes are inferred dynamically.
-        """
+    def __init__(self, config: Optional[dict] = None, lanes: Optional[Iterable[str]] = None):
         self.config = DEFAULT_CONFIG.copy()
         if config:
-            if isinstance(config, str):
-                self._load_config_from_file(config)
-            elif isinstance(config, dict):
-                self.config.update(config)
-        self.control_interval = float(self.config["control_interval"])
+            self.config.update(config)
+
+        # Timing & control params
         self.base_time = float(self.config["base_time"])
         self.factor = float(self.config["factor"])
         self.min_time = float(self.config["min_time"])
         self.max_time = float(self.config["max_time"])
+        self.yellow_time = float(self.config["yellow_time"])
+        self.all_red_time = float(self.config["all_red_time"])
+        self.control_interval = float(self.config["control_interval"])
+
+        # Behavior params
         self.starvation_weight = float(self.config["starvation_weight"])
-        self.log_file = self.config["log_file"]
-        self.service_order = self.config.get("service_order", "auto")
+        self.max_starvation_multiplier = float(self.config["max_starvation_multiplier"])
+        self.service_order = str(self.config.get("service_order", "auto"))
+        self.smoothing_alpha = float(self.config.get("smoothing_alpha", 0.4))
 
-        # Track lanes and last served times to prevent starvation
-        self.lanes = list(lanes) if lanes else []
+        # Logging
+        self.log_file = str(self.config.get("log_file", "logs/traffic_log.json"))
+
+        # high-density protection params
+        self.high_density_threshold = float(self.config.get("high_density_threshold", 12))
+        self.max_red_wait_high_density = float(self.config.get("max_red_wait_high_density", 35.0))
+
+        # Lane bookkeeping
+        self.lanes: List[str] = list(lanes) if lanes else []
         now = time.time()
-        self.last_served = {lane: now for lane in self.lanes}  # lane -> timestamp
-        self._ensure_logfile()
-
-        # round-robin pointer (used if service_order == 'round_robin')
+        self.last_served: Dict[str, float] = {lane: now for lane in self.lanes}
+        # smoothed counts (EWMA) to avoid jitter
+        self.smoothed_counts: Dict[str, float] = {lane: 0.0 for lane in self.lanes}
         self.rr_index = 0
 
-    def _load_config_from_file(self, path):
-        if yaml is None:
-            raise RuntimeError("PyYAML not installed: cannot load YAML config. Provide dict config or install pyyaml.")
-        with open(path, "r") as f:
-            data = yaml.safe_load(f)
-            if data:
-                self.config.update(data)
+        # ensure logging path
+        self._ensure_logfile()
 
+    # ---------- Logging (JSON array) ----------
     def _ensure_logfile(self):
         logdir = os.path.dirname(self.log_file) or "."
         os.makedirs(logdir, exist_ok=True)
-
-        # if file doesn't exist, create an empty array (for JSON logs)
         if not os.path.exists(self.log_file):
-            with open(self.log_file, "w") as f:
-                f.write("[]")  # start as empty JSON list
+            # initialize as empty JSON array
+            with open(self.log_file, "w", encoding="utf-8") as f:
+                f.write("[]")
+    
+    def _append_json_record(self, record: dict):
+        """
+        Append a record into the JSON array file.
+        Implementation: read existing array (json.load), append, write back.
+        This is straightforward and robust for moderate log sizes. If you expect
+        extremely large files, switch to NDJSON or a DB.
+        """
+        try:
+            # ensure file exists
+            self._ensure_logfile()
+            with open(self.log_file, "r+", encoding="utf-8") as f:
+                try:
+                    data = json.load(f)
+                    if not isinstance(data, list):
+                        data = []
+                except Exception:
+                    # file corrupted or empty -> reset to empty list
+                    data = []
+                data.append(record)
+                f.seek(0)
+                json.dump(data, f, indent=2)
+                f.truncate()
+        except Exception as e:
+            # don't crash controller on logging failure
+            print("Warning: failed to append JSON log:", e)
 
-    def register_lanes(self, lanes):
-        """Register lane names (list). Can be called at startup to set lanes."""
+    def register_lanes(self, lanes: Iterable[str]):
+        """Add lanes if new; initialize bookkeeping."""
         for lane in lanes:
             if lane not in self.lanes:
                 self.lanes.append(lane)
                 self.last_served[lane] = time.time()
+                self.smoothed_counts[lane] = 0.0
 
-    def calculate_green_time(self, vehicle_count):
-        """Compute green_time clamped to min/max using formula base + factor * count."""
-        green_time = self.base_time + self.factor * float(vehicle_count)
-        if green_time < self.min_time:
-            green_time = self.min_time
-        if green_time > self.max_time:
-            green_time = self.max_time
-        return float(green_time)
+    # ---------- Timing calculation ----------
+    def calculate_green_time(self, vehicle_count: float) -> float:
+        """
+        Compute green time using sqrt scaling:
+            green = base + factor * sqrt(count)
+        Clamped to [min_time, max_time].
+        sqrt scaling reduces runaway time when count is large.
+        """
+        v = max(0.0, float(vehicle_count))
+        green = self.base_time + self.factor * math.sqrt(v)
+        green = max(self.min_time, min(self.max_time, green))
+        return float(green)
 
-    def _score_for_lane(self, lane, count):
-        """
-        Score to pick lane to serve next.
-        Uses vehicle count + starvation boost based on time since last served.
-        """
+    # ---------- Selection ----------
+    def _starvation_boost(self, lane: str) -> float:
+        """Compute bounded starvation boost based on time since last served."""
         now = time.time()
         last = self.last_served.get(lane, 0.0)
-        time_wait = max(0.0, now - last)
-        # Normalize wait in units of control_interval, multiply by starvation_weight
-        wait_boost = (time_wait / max(1.0, self.control_interval)) * self.starvation_weight
-        return float(count) + wait_boost
+        wait = max(0.0, now - last)
+        multiplier = (wait / max(1.0, self.control_interval)) * self.starvation_weight
+        # Bound the multiplier so starvation can't dominate completely
+        return min(multiplier, self.max_starvation_multiplier)
 
-    def select_lane(self, counts):
-        """
-        counts: dict of lane -> vehicle_count
-        returns: selected lane name
-        """
-        # Register any new lanes found in counts
-        self.register_lanes(list(counts.keys()))
+    def _score_for_lane(self, lane: str) -> float:
+        """Score = smoothed_count + starvation_boost"""
+        count = self.smoothed_counts.get(lane, 0.0)
+        return float(count) + self._starvation_boost(lane)
 
+    def select_lane(self, counts: Dict[str, int]) -> str:
+        """Select lane with prioritization for high-density lanes that waited too long."""
+        self.register_lanes(counts.keys())
+        if not self.lanes:
+            raise ValueError("No lanes registered.")
+
+        now = time.time()
+
+        # 1) Forced selection: Any high-density lane that has waited >= max_red_wait_high_density?
+        starving_high = []
+        for lane in self.lanes:
+            smoothed = float(self.smoothed_counts.get(lane, 0.0))
+            if smoothed >= self.high_density_threshold:
+                last = self.last_served.get(lane, 0.0)
+                wait = now - last
+                if wait >= self.max_red_wait_high_density:
+                    starving_high.append((wait, lane))
+
+        if starving_high:
+            # Choose the high-density lane that waited the longest (tie-break by name).
+            starving_high.sort(key=lambda x: (-x[0], x[1]))
+            return starving_high[0][1]
+
+        # 2) Normal operation
         if self.service_order == "round_robin":
-            # simple round robin that respects lane order
-            lanes = self.lanes
-            if not lanes:
-                raise ValueError("No lanes registered.")
-            selected = lanes[self.rr_index % len(lanes)]
+            selected = self.lanes[self.rr_index % len(self.lanes)]
             self.rr_index += 1
             return selected
 
-        # default: score-based selection (counts + starvation boost)
         best_lane = None
-        best_score = -1.0
-        # deterministic tie-break by lane name
-        for lane in sorted(counts.keys()):
-            count = counts.get(lane, 0)
-            score = self._score_for_lane(lane, count)
-            # tie-breaking: use higher count then earlier last_served (handled by boost)
-            if best_lane is None or score > best_score:
+        best_score = -float("inf")
+        for lane in sorted(self.lanes):  # deterministic tie-break
+            score = self._score_for_lane(lane)
+            if score > best_score:
                 best_score = score
                 best_lane = lane
         return best_lane
 
-    def run_once(self, counts):
+    # ---------- Public API ----------
+    def run_once(self, counts: Dict[str, int]) -> Tuple[Optional[str], float]:
         """
-        Do one control decision based on counts dict.
-        Returns (served_lane, green_time_seconds).
-        Also writes a log row.
+        Make one decision.
+        counts: raw detected counts (lane -> integer)
+        Returns: (served_lane, green_time_seconds)
         """
-        if not counts or len(counts) == 0:
-            # nothing detected; default to round-robin or skip
+        counts = counts or {}
+        # register lanes and ensure smoothed_counts keys
+        self.register_lanes(counts.keys())
+
+        # Update smoothed counts using EWMA
+        alpha = self.smoothing_alpha
+        for lane in self.lanes:
+            raw = float(counts.get(lane, 0))
+            prev = self.smoothed_counts.get(lane, 0.0)
+            self.smoothed_counts[lane] = alpha * raw + (1 - alpha) * prev
+
+        # decide which lane to serve
+        # if all counts zero, fallback to round robin quick cycle
+        total_raw = sum(int(counts.get(l, 0)) for l in self.lanes)
+        if total_raw == 0:
+            # no detected traffic — short green to each lane in round-robin order
             if self.lanes:
-                # choose next lane in rr if lanes known
                 served = self.lanes[self.rr_index % len(self.lanes)]
                 self.rr_index += 1
             else:
-                return (None, 0.0)
+                return None, 0.0
         else:
             served = self.select_lane(counts)
 
-        vehicle_count = counts.get(served, 0)
-        green_time = self.calculate_green_time(vehicle_count)
-        # update last served timestamp
+        # compute green time using smoothed count for the served lane
+        vehicle_count_for_served = self.smoothed_counts.get(served, 0.0)
+        green_time = self.calculate_green_time(vehicle_count_for_served)
+
+        # update last_served timestamp (we set it now so starvation resets)
         self.last_served[served] = time.time()
 
-        # log
-        self._log_cycle(served, green_time, counts)
-        return served, green_time
-
-    def _log_cycle(self, served_lane, green_time, counts):
+        # build record and append to JSON log
         ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        cycle = self._format_cycle(served, green_time, counts)
+        record = {"timestamp": ts, "cycle": cycle}
+        self._append_json_record(record)
 
-        # Build the record
-        record = {
-            "timestamp": ts,
-            "cycle": self._format_output(served_lane, green_time, counts)
+        return served, float(green_time)
+
+    def _format_cycle(self, served_lane: Optional[str], green_time: float, counts: Dict[str, int]) -> Dict[str, dict]:
+        """
+        Build cycle dict matching requested structure:
+        {
+          "Lane 1": {"status": "Red"/"Green", "time": int, "count": n, "density": "High"/...},
+          ...
         }
-
-        # Load existing logs (if any)
-        try:
-            with open(self.log_file, "r") as f:
-                logs = json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError):
-            logs = []
-
-        # Append new record
-        logs.append(record)
-
-        # Save updated list back to file
-        with open(self.log_file, "w") as f:
-            json.dump(logs, f, indent=2)
-        
-    def _format_output(self, served_lane, green_time, counts):
-        """Return a dict with status, time, count, density for each lane."""
-
-        output = {}
-        for i, (lane, count) in enumerate(counts.items(), start=1):
+        The served lane gets "Green" with time=int(green_time).
+        Other lanes get "Red" with time=int(green_time * 2)  (keeps prior behaviour).
+        """
+        cycle = {}
+        # ensure lanes registered and deterministic order
+        self.register_lanes(counts.keys())
+        for i, lane in enumerate(self.lanes, start=1):
+            count = int(counts.get(lane, 0))
             if lane == served_lane:
                 status = "Green"
-                time = int(green_time)
+                time_val = int(round(green_time))
             else:
                 status = "Red"
-                time = int(green_time * 2)  # arbitrary, adjust if needed
+                time_val = int(round(green_time + self.yellow_time + self.all_red_time))
 
-            # density classification
-            if count > 10:
+            # density classification (same thresholds as your original)
+            if count > self.high_density_threshold:
                 density = "High"
             elif count > 5:
                 density = "Medium"
             else:
                 density = "Low"
 
-            output[f"Lane {i}"] = {
+            cycle[f"Lane {i}"] = {
                 "status": status,
-                "time": time,
+                "time": time_val,
                 "count": count,
-                "density": density,
+                "density": density
             }
+        return cycle
 
-        return output
-
-
-    def run_loop(self, poll_counts_fn, update_ui_fn=None, stop_after_cycles=None):
+    def run_loop(
+        self,
+        poll_counts_fn: Callable[[], Dict[str, int]],
+        update_ui_fn: Optional[Callable[[str, float], None]] = None,
+        stop_after_cycles: Optional[int] = None
+    ):
+        """
+        Blocking loop that polls counts and runs the controller.
+        It emits a Green phase (served lane green_time), then a Yellow phase (yellow_time).
+        """
         cycles = 0
         try:
             while True:
                 counts = poll_counts_fn() or {}
                 served, green_time = self.run_once(counts)
 
-                # 🔹 build structured output
-                output = {}
-                for i, lane in enumerate(self.lanes, start=1):
-                    count = counts.get(lane, 0)
+                # Print the same structure to console for visibility
+                ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                cycle = self._format_cycle(served, green_time, counts)
+                print(json.dumps({"timestamp": ts, "cycle": cycle}, indent=2))
 
-                    # classify density
-                    if count <= 5:
-                        density = "Low"
-                    elif count <= 12:
-                        density = "Medium"
-                    else:
-                        density = "High"
-
-                    if lane == served:
-                        status = "Green"
-                        time_val = green_time
-                    else:
-                        status = "Red"
-                        time_val = max(green_time, 15)  # fallback red duration
-
-                    output[f"Lane {i}"] = {
-                        "status": status,
-                        "time": time_val,
-                        "count": count,
-                        "density": density
-                    }
-
-                # 🔹 Add a Yellow transition for the served lane
-                output[f"Lane {self.lanes.index(served)+1}"]["status"] = "Yellow"
-                output[f"Lane {self.lanes.index(served)+1}"]["time"] = 5
-
-                # print JSON-like structured output
-                print(output)
-
-                # 🔹 UI hook (if dashboard exists)
                 if update_ui_fn:
                     try:
                         update_ui_fn(served, green_time)
                     except Exception as e:
                         print("Warning: update_ui_fn error:", e)
 
-                # wait for green period but allow interruption
-                waited = 0.0
-                step = 0.2
-                while waited < green_time:
-                    time.sleep(step)
-                    waited += step
+                # green phase -> yellow -> optional all red
+                time.sleep(max(0.0, green_time))
+                time.sleep(max(0.0, self.yellow_time))
+                if self.all_red_time > 0:
+                    time.sleep(max(0.0, self.all_red_time))
 
                 cycles += 1
                 if stop_after_cycles and cycles >= stop_after_cycles:
@@ -288,20 +318,12 @@ class decide_signal:
         except KeyboardInterrupt:
             print("Controller loop interrupted by user.")
 
-
-
-# -----------------------
-# Demo / example usage
-# -----------------------
+# --------------- Demo ---------------
 def _demo_poll_counts_random(lanes):
-    """Return simulated random counts for demo/testing."""
     return {lane: random.randint(0, 20) for lane in lanes}
 
-
 if __name__ == "__main__":
-    # Simple CLI demo: serves four lanes with random counts
     demo_lanes = ["A", "B", "C", "D"]
     controller = decide_signal(config=None, lanes=demo_lanes)
     print("Demo decide_signal started. Press Ctrl+C to stop.")
-    # Run loop with random counts; update_ui_fn is None (prints to console)
     controller.run_loop(lambda: _demo_poll_counts_random(demo_lanes), update_ui_fn=None, stop_after_cycles=12)

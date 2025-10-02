@@ -10,10 +10,10 @@ USE_VIDEO = True
 
 # ✅ Define per-lane video paths
 VIDEO_PATHS = {
-    "lane1": r"video 1.mp4",
-    "lane2": r"video 2.mp4",
-    "lane3": r"video 3.mp4",
-    "lane4": r"video 4.mp4"
+    "lane2": r"backend/video_input/videos/t1.mp4",
+    "lane1": r"backend/video_input/videos/t2.mp4",
+    "lane3": r"backend/video_input/videos/t3.mp4",
+    "lane4": r"backend/video_input/videos/t4.mp4",
 }
 
 # ✅ Load one frame from a video

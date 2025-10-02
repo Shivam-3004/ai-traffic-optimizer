@@ -3,6 +3,7 @@ import pandas as pd
 import altair as alt
 import requests
 import time
+import os
 
 # --- Page Config ---
 st.set_page_config(page_title="AI Traffic Analyzer", layout="wide")
@@ -22,10 +23,10 @@ def fetch_data():
 
 # --- Video Files ---
 video_files = [
-    "3285790-hd_1920_1080_30fps.mp4",
-    "3285790-hd_1920_1080_30fps.mp4",
-    "3285790-hd_1920_1080_30fps.mp4",
-    "3285790-hd_1920_1080_30fps.mp4"
+    r"backend/video_input/videos/t1.mp4",
+    r"backend/video_input/videos/t2.mp4",
+    r"backend/video_input/videos/t3.mp4",
+    r"backend/video_input/videos/t4.mp4"
 ]
 
 # --- Placeholders ---
@@ -41,6 +42,7 @@ cols = st.columns(2)
 for idx, lane in enumerate(lane_names):
     col = cols[idx % 2] if idx < 2 else cols[idx % 2].container()
     with col:
+# <<<<<<< ui-simulation
         # --- Lane name and signal in same row ---
         lane_col, signal_col = st.columns([1, 2])
         with lane_col:
@@ -64,6 +66,14 @@ for idx, lane in enumerate(lane_names):
 
 
 st.markdown("---")
+# =======
+#         st.subheader(lane)
+#         signal_placeholders[lane] = st.empty()
+#         st.video(os.path.join("..", "backend", "video_input", "videos", "tr1.mp4"))
+#         metrics_placeholders[lane] = st.empty()
+#         metrics_placeholders[lane].metric("Vehicle Count", 0, "Density: Low")
+#         signal_placeholders[lane].write("Signal: Red | Time Left: 0 sec")
+# >>>>>>> main
 
 # --- Altair Chart Placeholder ---
 chart_placeholder = st.empty()
