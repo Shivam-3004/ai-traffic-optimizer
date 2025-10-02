@@ -6,9 +6,18 @@
 # ------------------------------------------------------------
 
 from flask import Flask, jsonify
-from backend.video_input.video_common import VIDEO_PATHS, get_video_frame  # ✅ Centralized video logic
+from backend.video_input.video_common import VIDEO_PATHS, get_video_frame  #  Centralized video logic
 from backend.detection.vehicle_counter import detect_vehicles
 from backend.logic.signal_controller import decide_signal
+from ultralytics import YOLO  # or your YOLO import
+import sys
+import os
+
+# Add the parent directory to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+# Load YOLO model once
+model = YOLO("backend/detection/models/best.pt")  # adjust path if needed
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -22,7 +31,7 @@ def vehicle_count():
     try:
         for lane, path in VIDEO_PATHS.items():
             frame = get_video_frame(path)
-            boxes = detect_vehicles(frame)
+            boxes = detect_vehicles(frame, model)  # pass model here
             lane_counts[lane] = len(boxes)
     except Exception as e:
         return jsonify({"error": f"Failed to process video frames: {str(e)}"}), 500
@@ -38,7 +47,7 @@ def signal_status():
     try:
         for lane, path in VIDEO_PATHS.items():
             frame = get_video_frame(path)
-            boxes = detect_vehicles(frame)
+            boxes = detect_vehicles(frame, model)  # pass model here
             lane_counts[lane] = len(boxes)
     except Exception as e:
         return jsonify({"error": f"Failed to process video frames: {str(e)}"}), 500
