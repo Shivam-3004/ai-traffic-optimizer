@@ -1,80 +1,103 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+import requests
+import time
 
+# --- Page Config ---
 st.set_page_config(page_title="AI Traffic Analyzer", layout="wide")
-st.title("🚦 AI Traffic Analyzer")
+st.title("🚦 AI TRAFFIC MONITORING DASHBOARD")
 
-lane_data = {
-    "Lane 1": {"count": 12, "density": "High"},
-    "Lane 2": {"count": 8, "density": "Medium"},
-    "Lane 3": {"count": 5, "density": "Low"},
-    "Lane 4": {"count": 15, "density": "High"}
-}
+# --- API Config ---
+API_URL = "http://127.0.0.1:5000"
 
-df = pd.DataFrame([
-    {"Lane": lane, "Vehicle Count": data["count"], "Density": data["density"]}
-    for lane, data in lane_data.items()
-])
+def fetch_data():
+    """Fetch vehicle count and signal status from API. If fail, return default values."""
+    try:
+        vehicle_data = requests.get(f"{API_URL}/vehicle-count").json()
+        signal_data = requests.get(f"{API_URL}/signal-status").json()
+    except:
+        vehicle_data = {f"lane{i}": 0 for i in range(1, 5)}
+        signal_data = {f"lane{i}": {"status": "Red", "time": 0} for i in range(1, 5)}
+    return vehicle_data, signal_data
 
+# --- Video Files ---
+video_files = [
+    "3285790-hd_1920_1080_30fps.mp4",
+    "3285790-hd_1920_1080_30fps.mp4",
+    "3285790-hd_1920_1080_30fps.mp4",
+    "3285790-hd_1920_1080_30fps.mp4"
+]
 
-st.markdown("""
-    <style>
-    video {
-        height: 250px !important;
-        width: 100% !important;
-        object-fit: cover;
-        border-radius: 10px;
-    }
-    </style>
-""", unsafe_allow_html=True)
+# --- Placeholders ---
+metrics_placeholders = {}
+signal_placeholders = {}
 
-col1, col2 = st.columns(2)
-with col1:
-    st.subheader("Lane 1")
+# --- Layout: 2x2 Grid ---
+cols = st.columns(2)
+lane_names = ["Lane 1", "Lane 2", "Lane 3", "Lane 4"]
 
-    st.video(r"F:\Drive C content\hackathon\ai-traffic-optimizer\frontend\second\3285790-hd_1920_1080_30fps.mp4" )
-    m1, m2 = st.columns(2)
-    m1.metric("vehicle_count :",lane_data["Lane 1"]["count"])
-    m2.metric("vehicle_density :",lane_data["Lane 1"]["density"])
-with col2:
-    st.subheader("Lane 2")
-    st.video(r"F:\Drive C content\hackathon\ai-traffic-optimizer\frontend\second\3285790-hd_1920_1080_30fps.mp4" )
-    m1, m2 = st.columns(2)
-    m1.metric("vehicle_count :",lane_data["Lane 2"]["count"])
-    m2.metric("vehicle_density :",lane_data["Lane 2"]["density"])
+for idx, lane in enumerate(lane_names):
+    col = cols[idx % 2] if idx < 2 else cols[idx % 2].container()
+    with col:
+        st.subheader(lane)
+        signal_placeholders[lane] = st.empty()
+        st.video(video_files[idx])
+        metrics_placeholders[lane] = st.empty()
+        metrics_placeholders[lane].metric("Vehicle Count", 0, "Density: Low")
+        signal_placeholders[lane].write("Signal: Red | Time Left: 0 sec")
 
-col3, col4 = st.columns(2)
-with col3:
-    st.subheader("Lane 3")
-    st.video(r"F:\Drive C content\hackathon\ai-traffic-optimizer\frontend\second\3285790-hd_1920_1080_30fps.mp4" )
-    m1, m2 = st.columns(2)
-    m1.metric("vehicle_count :",lane_data["Lane 3"]["count"])
-    m2.metric("vehicle_density :",lane_data["Lane 3"]["density"])
+# --- Altair Chart Placeholder ---
+chart_placeholder = st.empty()
 
-with col4:
-    st.subheader("Lane 4")
-    st.video(r"F:\Drive C content\hackathon\ai-traffic-optimizer\frontend\second\3285790-hd_1920_1080_30fps.mp4" )
-    m1, m2 = st.columns(2)
-    m1.metric("vehicle_count :",lane_data["Lane 4"]["count"])
-    m2.metric("vehicle_density :",lane_data["Lane 4"]["density"])
-
-st.markdown("## 📊 Lane-wise Vehicle Count with Density Colors")
-density_colors = alt.Scale(
-domain=["High", "Medium", "Low", "Very Low"],
-range=["red", "orange", "yellow", "green"]
+# --- Footer (Loop ke bahar) ---
+st.markdown(
+    """
+    <hr style="margin-top:50px; margin-bottom:10px;">
+    <div style="text-align:center; padding:10px; font-size:14px; color:grey;">
+    🚦 <b>AI Traffic Optimizer</b><br>
+    Built with <b>YOLO</b> (Object Detection) | <b>Flask</b> (Backend API) | <b>Streamlit</b> (Dashboard) | <b>Python</b> 🐍 <br><br>
+    © 2025 <b>Team XYZ</b> | Hackathon Project <br>
+    🔗 <a href="https://github.com/your-username/ai-traffic-optimizer" target="_blank">View on GitHub</a>
+    </div>
+    """,
+    unsafe_allow_html=True
 )
 
-chart = (
-alt.Chart(df)
-.mark_bar()
-.encode(
-    x=alt.X("Lane:N", title="Traffic Lanes"),
-    y=alt.Y("Vehicle Count:Q", title="Number of Vehicles"),
-    color=alt.Color("Density:N", scale=density_colors, legend=alt.Legend(title="Vehicle Density")),
-    tooltip=["Lane", "Vehicle Count", "Density"]
-)
-.properties(height=400, width=700, title="Lane-wise Vehicle Count")
-)
+# --- Real-time Metrics & Chart Update Loop ---
+REFRESH_INTERVAL = 2  # seconds
+while True:
+    vehicle_data, signal_data = fetch_data()
+    lane_data = {}
 
-st.altair_chart(chart, use_container_width=True)
+    for i, lane in enumerate(lane_names, 1):
+        count = vehicle_data.get(f"lane{i}", 0)
+        density = "High" if count > 10 else "Medium" if count > 5 else "Low"
+        status = signal_data.get(f"lane{i}", {}).get("status", "Red")
+        time_left = signal_data.get(f"lane{i}", {}).get("time", 0)
+
+        lane_data[lane] = {"count": count, "density": density, "status": status, "time": time_left}
+
+        # Update metrics and signals dynamically
+        metrics_placeholders[lane].metric("Vehicle Count", count, f"Density: {density}")
+        signal_placeholders[lane].write(f"Signal: {status} | Time Left: {time_left} sec")
+
+    # --- Update chart dynamically ---
+    df = pd.DataFrame([{"Lane": lane, "Vehicle Count": data["count"], "Density": data["density"]} 
+                       for lane, data in lane_data.items()])
+
+    density_colors = alt.Scale(domain=["High", "Medium", "Low", "Very Low"],
+                               range=["red", "orange", "yellow", "green"])
+
+    chart = (alt.Chart(df)
+             .mark_bar()
+             .encode(
+                 x=alt.X("Lane:N", title="Traffic Lanes"),
+                 y=alt.Y("Vehicle Count:Q", title="Number of Vehicles"),
+                 color=alt.Color("Density:N", scale=density_colors, legend=alt.Legend(title="Vehicle Density")),
+                 tooltip=["Lane", "Vehicle Count", "Density"]
+             )
+             .properties(height=400, width=700, title="Lane-wise Vehicle Count"))
+
+    chart_placeholder.altair_chart(chart, use_container_width=True)
+    time.sleep(REFRESH_INTERVAL)
