@@ -1,10 +1,7 @@
-nc : 8
-names :
-  0: 'Auto-rickshaw'
-  1: 'Bike'
-  2: 'Bus'
-  3: 'Car'
-  4: 'HCV'
-  5: 'LCV'
-  6: 'Toto'
-  
+nc: 5
+names:
+  0: 'Ambulance'
+  1: 'Bus'
+  2: 'Car'
+  3: 'Motorcycle'
+  4: 'Truck'
