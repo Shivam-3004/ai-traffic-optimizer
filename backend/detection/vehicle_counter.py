@@ -12,7 +12,7 @@ def detect_vehicles(frame, model):
     for box in results.boxes:
         x, y, w, h = box.xywh[0].tolist()
         cls_id = int(box.cls[0].item())
-        class_name = results.names[cls_id]
+        class_name = results.names[cls_id].lower()
         detections.append((x, y, w, h, class_name))
     return detections
 

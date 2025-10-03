@@ -14,13 +14,12 @@ lanes = {
 # Vehicle Weights
 # -----------------------------
 vehicle_weights = {
-    "Auto_rickshaw": 3,
-    "Bike": 1,
-    "Bus": 5,
-    "Car": 3,
-    "HCV": 5,
-    "LCV": 4,
-    "Toto": 2,
+ 'ambulance':4,
+   'bus':5,
+   'car':3,
+   'motorcycle':1,
+   'truck':5,
+
 }
 
 # -----------------------------
