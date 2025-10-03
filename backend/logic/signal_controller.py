@@ -317,13 +317,3 @@ class decide_signal:
                     break
         except KeyboardInterrupt:
             print("Controller loop interrupted by user.")
-
-# --------------- Demo ---------------
-def _demo_poll_counts_random(lanes):
-    return {lane: random.randint(0, 20) for lane in lanes}
-
-if __name__ == "__main__":
-    demo_lanes = ["A", "B", "C", "D"]
-    controller = decide_signal(config=None, lanes=demo_lanes)
-    print("Demo decide_signal started. Press Ctrl+C to stop.")
-    controller.run_loop(lambda: _demo_poll_counts_random(demo_lanes), update_ui_fn=None, stop_after_cycles=12)
