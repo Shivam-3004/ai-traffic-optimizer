@@ -23,10 +23,11 @@ def fetch_data():
 
 # --- Video Files ---
 video_files = [
-    os.path.abspath(os.path.join("..", "backend", "video_input", "videos", "t1.mp4")),
-    os.path.abspath(os.path.join("..", "backend", "video_input", "videos", "t2.mp4")),
-    os.path.abspath(os.path.join("..", "backend", "video_input", "videos", "t3.mp4")),
-    os.path.abspath(os.path.join("..", "backend", "video_input", "videos", "t4.mp4"))
+    r"../backend/video_input/videos/t1.mp4",
+    r"../backend/video_input/videos/t2.mp4",
+    r"../backend/video_input/videos/t3.mp4",
+    r"../backend/video_input/videos/t4.mp4"
+
 ]
 
 # --- Placeholders ---
@@ -42,12 +43,31 @@ cols = st.columns(2)
 for idx, lane in enumerate(lane_names):
     col = cols[idx % 2] if idx < 2 else cols[idx % 2].container()
     with col:
-        st.subheader(lane)
-        signal_placeholders[lane] = st.empty()
-        st.video(os.path.join("..", "backend", "video_input", "videos", "t1.mp4"))
-        metrics_placeholders[lane] = st.empty()
-        metrics_placeholders[lane].metric("Vehicle Count", 0, "Density: Low")
-        signal_placeholders[lane].write("Signal: Red | Time Left: 0 sec")
+# <<<<<<< ui-simulation
+        # --- Lane name and signal in same row ---
+        lane_col, signal_col = st.columns([1, 2])
+        with lane_col:
+            st.subheader(lane)
+        with signal_col:
+            signal_placeholders[lane] = st.empty()
+            signal_placeholders[lane].write("Signal: Red | Time Left: 0 sec")
+        
+        # --- Video below ---
+        st.video(video_files[idx], start_time=0, format="video/mp4", width=400)
+        # --- Vehicle count & density in same row (below video) ---
+        count_col, density_col = st.columns(2)
+        st.markdown("<hr>", unsafe_allow_html=True)
+        with count_col:
+            metrics_placeholders[lane] = st.empty()
+            metrics_placeholders[lane].metric("Vehicle Count", 0)
+        with density_col:
+            density_placeholders[lane] = st.empty()
+            density_placeholders[lane].metric("Density", "Low")
+       
+
+
+st.markdown("---")
+
 
 # --- Altair Chart Placeholder ---
 chart_placeholder = st.empty()
@@ -60,8 +80,7 @@ st.markdown(
     🚦 <b>AI Traffic Optimizer</b><br>
     Built with <b>YOLO</b> | <b>Flask</b> | <b>Streamlit</b> | <b>Python</b> 🐍 <br><br>
     © 2025 <b>Team C.S.E</b> | Hackathon Project <br>
-       © 2025 <b>Team XYZ</b> | Hackathon Project <br>
-    🔗 <a href="https://github.com/your-username/ai-traffic-optimizer" target="_blank">View on GitHub</a>
+    🔗 <a href="https://github.com/Shivam-3004/ai-traffic-optimizer" target="_blank">View on GitHub</a>
     </div>
     """,
     unsafe_allow_html=True
@@ -99,6 +118,3 @@ while True:
 
     chart_placeholder.altair_chart(chart, use_container_width=True)
     time.sleep(REFRESH_INTERVAL)
-
-
-    
