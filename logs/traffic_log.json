@@ -1,0 +1,7197 @@
+[
+  {
+    "timestamp": "2025-10-02 21:18:09",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:10",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:12",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:12",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:15",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:15",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:18",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:18",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:20",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:21",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:23",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:24",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:26",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:27",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:28",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:29",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:31",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:32",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:34",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:34",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:36",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:37",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:39",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:39",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:41",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:42",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:44",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:45",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:47",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:47",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:49",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:50",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:52",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:53",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:54",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:55",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:57",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:18:58",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:00",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:00",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:02",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:03",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:05",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:06",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:07",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:08",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:10",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:11",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:13",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:13",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:15",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:16",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:18",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:19",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:21",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:21",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:23",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:24",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:26",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:27",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:28",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:29",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:31",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:32",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:33",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:34",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:36",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:37",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:39",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:39",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:41",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:42",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:44",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:45",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:47",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:48",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:49",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:19:51",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 1,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 3,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:25",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:25",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:29",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:32",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:36",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:38",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:43",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:45",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:50",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:52",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:57",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:27:59",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:04",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:06",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:11",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:13",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:17",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:20",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:24",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:27",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:31",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:34",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:37",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:41",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:28:45",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:33:48",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:33:48",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:33:57",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:33:57",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:05",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:05",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:13",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:14",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:22",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:22",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:30",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:30",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:39",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:34:39",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:38:44",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:38:44",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:38:54",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:38:54",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:39:03",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 21:39:03",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:12:52",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:12:53",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:12:54",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:19:17",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:19:17",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:19:18",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:19:19",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:26:59",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:27:00",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:27:15",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:30:28",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:30:28",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:30:42",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:30:59",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:31:12",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:31:27",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:31:40",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:42:14",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 22:42:28",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:19:55",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:20:49",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:20:55",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:21:01",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:21:06",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:21:12",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:21:18",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:24:20",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:26:48",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:29:25",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:32:39",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:36:50",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:51:20",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:54:30",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:54:36",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:54:57",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:03",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:08",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:14",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:20",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:26",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:32",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:37",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:43",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:48",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:55:54",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-02 23:56:00",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:05:49",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:05:49",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:05:58",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:05:58",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:06",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:06",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:15",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:15",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:23",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:23",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:30",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:30",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:38",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:38",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:46",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:46",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:53",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:06:54",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:00",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:01",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:06",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:07",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:13",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:15",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:21",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:22",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:28",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:29",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:35",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:36",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:42",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:44",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:49",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:51",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:56",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:07:58",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:04",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:06",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:12",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:13",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:19",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:20",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:26",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:27",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:33",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:34",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:39",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:41",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:46",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:48",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:53",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:08:55",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:09:00",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:09:02",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:09:07",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:09:09",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:09:14",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:09:17",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:09:23",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 00:09:26",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 10:47:41",
+    "cycle": {
+      "Lane 1": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 2": {
+        "status": "Green",
+        "time": 17,
+        "count": 2,
+        "density": "Low"
+      },
+      "Lane 3": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      },
+      "Lane 4": {
+        "status": "Red",
+        "time": 22,
+        "count": 0,
+        "density": "Low"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 10:56:46",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 10:57:05",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 10:58:01",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:01:45",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:02:02",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:02:16",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:02:30",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:02:44",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:34:28",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:34:28",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:34:34",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:34:39",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:34:44",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:34:50",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:34:55",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:00",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:05",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:11",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:16",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:21",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:27",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:32",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:37",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:42",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-03 11:35:48",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 17
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 22
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 22
+      }
+    }
+  }
+]

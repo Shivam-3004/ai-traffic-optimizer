@@ -75,7 +75,7 @@ class decide_signal:
         self.max_red_wait_high_density = float(self.config.get("max_red_wait_high_density", 35.0))
 
         # Lane bookkeeping
-        self.lanes: List[str] = list(lanes) if lanes else []
+        self.lanes: List[str] = list(lanes) if lanes else ["lane1", "lane2", "lane3", "lane4"]
         now = time.time()
         self.last_served: Dict[str, float] = {lane: now for lane in self.lanes}
         # smoothed counts (EWMA) to avoid jitter
@@ -242,19 +242,20 @@ class decide_signal:
 
     def _format_cycle(self, served_lane: Optional[str], green_time: float, counts: Dict[str, int]) -> Dict[str, dict]:
         """
-        Build cycle dict matching requested structure:
+        Build cycle dict matching dashboard structure:
         {
-          "Lane 1": {"status": "Red"/"Green", "time": int, "count": n, "density": "High"/...},
-          ...
+        "lane1": {"status": "Red"/"Green", "time": int},
+        ...
         }
-        The served lane gets "Green" with time=int(green_time).
-        Other lanes get "Red" with time=int(green_time * 2)  (keeps prior behaviour).
+        Vehicle count and density should be returned separately via /vehicle-count
         """
         cycle = {}
-        # ensure lanes registered and deterministic order
-        self.register_lanes(counts.keys())
+        self.register_lanes(counts.keys())  # Ensure lanes are registered
+
         for i, lane in enumerate(self.lanes, start=1):
             count = int(counts.get(lane, 0))
+
+            # Signal status and time
             if lane == served_lane:
                 status = "Green"
                 time_val = int(round(green_time))
@@ -262,20 +263,12 @@ class decide_signal:
                 status = "Red"
                 time_val = int(round(green_time + self.yellow_time + self.all_red_time))
 
-            # density classification (same thresholds as your original)
-            if count > self.high_density_threshold:
-                density = "High"
-            elif count > 5:
-                density = "Medium"
-            else:
-                density = "Low"
-
-            cycle[f"Lane {i}"] = {
+            # Only include signal info here
+            cycle[f"lane{i}"] = {
                 "status": status,
-                "time": time_val,
-                "count": count,
-                "density": density
+                "time": time_val
             }
+
         return cycle
 
     def run_loop(
@@ -317,13 +310,3 @@ class decide_signal:
                     break
         except KeyboardInterrupt:
             print("Controller loop interrupted by user.")
-
-# --------------- Demo ---------------
-def _demo_poll_counts_random(lanes):
-    return {lane: random.randint(0, 20) for lane in lanes}
-
-if __name__ == "__main__":
-    demo_lanes = ["A", "B", "C", "D"]
-    controller = decide_signal(config=None, lanes=demo_lanes)
-    print("Demo decide_signal started. Press Ctrl+C to stop.")
-    controller.run_loop(lambda: _demo_poll_counts_random(demo_lanes), update_ui_fn=None, stop_after_cycles=12)
