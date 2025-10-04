@@ -1,29 +1,21 @@
 import cv2
 
-def get_video_frame(video_path):
-    """
-    Extracts a single frame from the given video file.
+VIDEO_PATHS = {
+    "lane1": "backend/video_input/videos/t1.mp4",
+    "lane2": "backend/video_input/videos/t2.mp4",
+    "lane3": "backend/video_input/videos/t3.mp4",
+    "lane4": "backend/video_input/videos/t4.mp4",
+}
 
-    Parameters:
-        video_path (str): Path to the video file.
+video_caps = {
+    lane: cv2.VideoCapture(path)
+    for lane, path in VIDEO_PATHS.items()
+}
 
-    Returns:
-        frame (ndarray): The first frame of the video.
-
-    Raises:
-        RuntimeError: If the frame cannot be read.
-    """
-    # Initialize video capture object
-    cap = cv2.VideoCapture(video_path)
-
-    # Attempt to read the first frame
+def get_next_frame(lane):
+    cap = video_caps[lane]
     ret, frame = cap.read()
-
-    # Release the video capture resource
-    cap.release()
-
-    # Validate frame read success
     if not ret or frame is None:
-        raise RuntimeError(f"Failed to read frame from video: {video_path}")
-
+        cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+        ret, frame = cap.read()
     return frame
