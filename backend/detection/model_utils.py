@@ -1,0 +1,58 @@
+import cv2
+
+# -----------------------------
+# Lane Definitions (ROIs)
+# -----------------------------
+lanes = {
+    "A": (50, 100, 250, 400),
+    "B": (300, 100, 500, 400),
+    "C": (550, 100, 750, 400),
+    "D": (800, 100, 1000, 400)
+}
+
+# -----------------------------
+# Vehicle Weights
+# -----------------------------
+vehicle_weights = {
+ 'ambulance':4,
+   'bus':5,
+   'car':3,
+   'motorcycle':1,
+   'truck':5,
+
+}
+
+# -----------------------------
+# Tracking Threshold
+# -----------------------------
+DIST_THRESHOLD = 30  # Centroid distance for tracking
+
+# -----------------------------
+# Helper Functions
+# -----------------------------
+def get_centroid(x, y, w, h):
+    """Return centroid of bounding box"""
+    return int(x), int(y)
+
+def which_lane(cx, cy):
+    """Check which lane ROI contains centroid"""
+    for lane, (x1, y1, x2, y2) in lanes.items():
+        if x1 < cx < x2 and y1 < cy < y2:
+            return lane
+    return None
+
+def draw_info(frame, counts, weights, detections):
+    """Draw ROIs, counts, weights, and detections"""
+    for lane, (x1, y1, x2, y2) in lanes.items():
+        cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        cv2.putText(frame, f"{lane}: {counts[lane]} | W={weights[lane]}",
+                    (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX,
+                    0.6, (0, 255, 0), 2)
+
+    for (x, y, w, h, cls) in detections:
+        cv2.rectangle(frame, (int(x - w/2), int(y - h/2)),
+                      (int(x + w/2), int(y + h/2)), (255, 0, 0), 2)
+        cv2.putText(frame, cls, (int(x - w/2), int(y - h/2) - 5),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+
+    return frame
