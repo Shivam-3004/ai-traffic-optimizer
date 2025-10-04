@@ -44,7 +44,7 @@ for idx, lane in enumerate(lane_names):
     with col:
         st.subheader(lane)
         signal_placeholders[lane] = st.empty()
-        st.video(os.path.join("..", "backend", "video_input", "videos", "tr1.mp4"))
+        st.video(os.path.join("..", "backend", "video_input", "videos", "t1.mp4"))
         metrics_placeholders[lane] = st.empty()
         metrics_placeholders[lane].metric("Vehicle Count", 0, "Density: Low")
         signal_placeholders[lane].write("Signal: Red | Time Left: 0 sec")
