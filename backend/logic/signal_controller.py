@@ -15,7 +15,6 @@ import os
 import json
 import time
 import math
-import random
 from datetime import datetime
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
 
@@ -75,7 +74,7 @@ class decide_signal:
         self.max_red_wait_high_density = float(self.config.get("max_red_wait_high_density", 35.0))
 
         # Lane bookkeeping
-        self.lanes: List[str] = list(lanes) if lanes else []
+        self.lanes: List[str] = list(lanes) if lanes else ["lane1", "lane2", "lane3", "lane4"]
         now = time.time()
         self.last_served: Dict[str, float] = {lane: now for lane in self.lanes}
         # smoothed counts (EWMA) to avoid jitter
@@ -242,19 +241,20 @@ class decide_signal:
 
     def _format_cycle(self, served_lane: Optional[str], green_time: float, counts: Dict[str, int]) -> Dict[str, dict]:
         """
-        Build cycle dict matching requested structure:
+        Build cycle dict matching dashboard structure:
         {
-          "Lane 1": {"status": "Red"/"Green", "time": int, "count": n, "density": "High"/...},
-          ...
+        "lane1": {"status": "Red"/"Green", "time": int},
+        ...
         }
-        The served lane gets "Green" with time=int(green_time).
-        Other lanes get "Red" with time=int(green_time * 2)  (keeps prior behaviour).
+        Vehicle count and density should be returned separately via /vehicle-count
         """
         cycle = {}
-        # ensure lanes registered and deterministic order
-        self.register_lanes(counts.keys())
+        self.register_lanes(counts.keys())  # Ensure lanes are registered
+
         for i, lane in enumerate(self.lanes, start=1):
             count = int(counts.get(lane, 0))
+
+            # Signal status and time
             if lane == served_lane:
                 status = "Green"
                 time_val = int(round(green_time))
@@ -262,20 +262,12 @@ class decide_signal:
                 status = "Red"
                 time_val = int(round(green_time + self.yellow_time + self.all_red_time))
 
-            # density classification (same thresholds as your original)
-            if count > self.high_density_threshold:
-                density = "High"
-            elif count > 5:
-                density = "Medium"
-            else:
-                density = "Low"
-
-            cycle[f"Lane {i}"] = {
+            # Only include signal info here
+            cycle[f"lane{i}"] = {
                 "status": status,
-                "time": time_val,
-                "count": count,
-                "density": density
+                "time": time_val
             }
+
         return cycle
 
     def run_loop(
@@ -285,45 +277,65 @@ class decide_signal:
         stop_after_cycles: Optional[int] = None
     ):
         """
-        Blocking loop that polls counts and runs the controller.
-        It emits a Green phase (served lane green_time), then a Yellow phase (yellow_time).
+        Improved loop:
+        - Uses counts snapshot to decide a green phase (locked).
+        - While green is active, continuously polls for newer counts and stores the latest.
+        - When the green+yellow+all_red finishes, the most recent polled counts are used for next decision.
+        - Keeps your JSON print, UI hook, yellow and all-red waits and stop_after_cycles.
         """
         cycles = 0
         try:
+            # Initially get a snapshot to start
+            counts_for_next = poll_counts_fn() or {}
+
             while True:
-                counts = poll_counts_fn() or {}
+                # Use the freshest snapshot available at the start of this cycle
+                counts = counts_for_next or {}
                 served, green_time = self.run_once(counts)
 
-                # Print the same structure to console for visibility
+                # Print structured cycle (keep your existing format)
                 ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 cycle = self._format_cycle(served, green_time, counts)
                 print(json.dumps({"timestamp": ts, "cycle": cycle}, indent=2))
 
+                # UI update (one shot per cycle as before)
                 if update_ui_fn:
                     try:
                         update_ui_fn(served, green_time)
                     except Exception as e:
                         print("Warning: update_ui_fn error:", e)
 
-                # green phase -> yellow -> optional all red
-                time.sleep(max(0.0, green_time))
-                time.sleep(max(0.0, self.yellow_time))
-                if self.all_red_time > 0:
-                    time.sleep(max(0.0, self.all_red_time))
+                # --- GREEN PHASE ---
+                # During green we keep sampling latest counts into `next_counts`
+                next_counts = counts  # start with current snapshot
+                green_start = time.monotonic()
+                step = 0.5  # seconds between polls; adjust to your needs (0.5 - 1.0 recommended)
+                while (time.monotonic() - green_start) < max(0.0, green_time):
+                    time.sleep(step)
+                    try:
+                        latest = poll_counts_fn() or {}
+                        # take latest snapshot (overwrite). If you prefer smoothing, do it here.
+                        if latest:
+                            next_counts = latest
+                    except Exception:
+                        # poll_counts_fn should be reliable; ignore occasional failures
+                        pass
+
+                # --- YELLOW PHASE --- (locked; small fixed interval)
+                # If you want to collect counts during yellow as well, uncomment similar polling.
+                time.sleep(max(0.0, getattr(self, "yellow_time", 0.0)))
+
+                # --- ALL RED PHASE (optional) ---
+                if getattr(self, "all_red_time", 0.0) > 0:
+                    time.sleep(self.all_red_time)
+
+                # Prepare for next cycle using the freshest snapshot collected during GREEN
+                counts_for_next = next_counts
 
                 cycles += 1
                 if stop_after_cycles and cycles >= stop_after_cycles:
                     print("Stopping after requested cycles.")
                     break
+
         except KeyboardInterrupt:
             print("Controller loop interrupted by user.")
-
-# --------------- Demo ---------------
-def _demo_poll_counts_random(lanes):
-    return {lane: random.randint(0, 20) for lane in lanes}
-
-if __name__ == "__main__":
-    demo_lanes = ["A", "B", "C", "D"]
-    controller = decide_signal(config=None, lanes=demo_lanes)
-    print("Demo decide_signal started. Press Ctrl+C to stop.")
-    controller.run_loop(lambda: _demo_poll_counts_random(demo_lanes), update_ui_fn=None, stop_after_cycles=12)

@@ -1,25 +1,25 @@
 import cv2
 
 # -----------------------------
-# Lane Definitions (ROIs)
+# Road Video Sources
+# (Each road has its own video feed)
 # -----------------------------
-lanes = {
-    "A": (50, 100, 250, 400),
-    "B": (300, 100, 500, 400),
-    "C": (550, 100, 750, 400),
-    "D": (800, 100, 1000, 400)
+roads = {
+    "roadA": "videos/roadA.mp4",
+    "roadB": "videos/roadB.mp4",
+    "roadC": "videos/roadC.mp4",
+    "roadD": "videos/roadD.mp4"
 }
 
 # -----------------------------
 # Vehicle Weights
 # -----------------------------
 vehicle_weights = {
- 'ambulance':4,
-   'bus':5,
-   'car':3,
-   'motorcycle':1,
-   'truck':5,
-
+    "ambulance": 4,
+    "bus": 5,
+    "car": 3,
+    "motorcycle": 1,
+    "truck": 5,
 }
 
 # -----------------------------
@@ -32,27 +32,30 @@ DIST_THRESHOLD = 30  # Centroid distance for tracking
 # -----------------------------
 def get_centroid(x, y, w, h):
     """Return centroid of bounding box"""
-    return int(x), int(y)
+    cx = int(x + w / 2)
+    cy = int(y + h / 2)
+    return cx, cy
 
-def which_lane(cx, cy):
-    """Check which lane ROI contains centroid"""
-    for lane, (x1, y1, x2, y2) in lanes.items():
-        if x1 < cx < x2 and y1 < cy < y2:
-            return lane
-    return None
 
-def draw_info(frame, counts, weights, detections):
-    """Draw ROIs, counts, weights, and detections"""
-    for lane, (x1, y1, x2, y2) in lanes.items():
-        cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-        cv2.putText(frame, f"{lane}: {counts[lane]} | W={weights[lane]}",
-                    (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX,
-                    0.6, (0, 255, 0), 2)
+def draw_info(frame, count, weight_sum, detections, road_name):
+    """
+    Draw detection boxes and display count & total weight for this road.
+    """
+    h, w, _ = frame.shape
+    overlay_text = f"{road_name}: {count} | Weight={weight_sum}"
 
-    for (x, y, w, h, cls) in detections:
-        cv2.rectangle(frame, (int(x - w/2), int(y - h/2)),
-                      (int(x + w/2), int(y + h/2)), (255, 0, 0), 2)
-        cv2.putText(frame, cls, (int(x - w/2), int(y - h/2) - 5),
+    # Draw label bar at top of frame
+    cv2.rectangle(frame, (0, 0), (w, 40), (0, 0, 0), -1)
+    cv2.putText(frame, overlay_text, (15, 30),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+
+    # Draw detection boxes
+    for (x, y, bw, bh, cls) in detections:
+        cv2.rectangle(frame,
+                      (int(x - bw / 2), int(y - bh / 2)),
+                      (int(x + bw / 2), int(y + bh / 2)),
+                      (255, 0, 0), 2)
+        cv2.putText(frame, cls,
+                    (int(x - bw / 2), int(y - bh / 2) - 5),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
-
     return frame
