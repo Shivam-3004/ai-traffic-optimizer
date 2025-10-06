@@ -5,10 +5,10 @@ import cv2
 # (Each road has its own video feed)
 # -----------------------------
 roads = {
-    "roadA": "videos/roadA.mp4",
-    "roadB": "videos/roadB.mp4",
-    "roadC": "videos/roadC.mp4",
-    "roadD": "videos/roadD.mp4"
+    "roadA": "backend/video_input/videos/t1.mp4",
+    "roadB": "backend/video_input/videos/t2.mp4",
+    "roadC": "backend/video_input/videos/t3.mp4",
+    "roadD": "backend/video_input/videos/t4.mp4"
 }
 
 # -----------------------------
