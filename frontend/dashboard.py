@@ -78,7 +78,7 @@ st.markdown(
     <hr style="margin-top:50px; margin-bottom:10px;">
     <div style="text-align:center; padding:10px; font-size:14px; color:grey;">
     🚦 <b>AI Traffic Optimizer</b><br>
-    Built with <b>YOLO</b> | <b>Flask</b> | <b>Streamlit</b> | <b>Python</b> 🐍 <br><br>
+    Built with <b>YOLO</b> | <b>Flask</b> | <b>Streamlit</b> | <b>Python</b> 🐍 <br>
     © 2025 <b>Team C.S.E</b> | Hackathon Project <br>
     🔗 <a href="https://github.com/Shivam-3004/ai-traffic-optimizer" target="_blank">View on GitHub</a>
     </div>
@@ -114,7 +114,7 @@ while True:
         y="Vehicle Count:Q",
         color=alt.Color("Density:N", scale=alt.Scale(domain=["High","Medium","Low"], range=["red","orange","green"])),
         tooltip=["Lane", "Vehicle Count", "Density"]
-    ).properties(height=400, width=700, title="Lane-wise Vehicle Count")
+    ).properties(height=400, width=00, title="Lane-wise Vehicle Count")
 
     chart_placeholder.altair_chart(chart, use_container_width=True)
     time.sleep(REFRESH_INTERVAL)
