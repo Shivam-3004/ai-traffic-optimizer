@@ -1,12 +1,12 @@
 from ultralytics import YOLO
 from scipy.spatial import distance
-from model_utils import get_centroid, vehicle_weights, DIST_THRESHOLD
+from backend.detection.model_utils import get_centroid, vehicle_weights, DIST_THRESHOLD
 
 # -----------------------------
 # Load YOLOv8 model once
 # -----------------------------
 # Use local models folder
-model = YOLO("models/best s2.pt")
+model = YOLO("models/best.pt")
 
 # -----------------------------
 # Detection Function
