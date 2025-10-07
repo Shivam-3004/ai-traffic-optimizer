@@ -1,8 +1,6 @@
 # ------------------------------------------------------------
 # File: backend/api/app.py
 # Project: AI Traffic Light Optimizer
-# Role: API Integration by Shivam Paliwal
-# Purpose: Serve vehicle count and signal decision using per-lane videos
 # ------------------------------------------------------------
 
 from flask import Flask, jsonify
@@ -38,6 +36,7 @@ app = Flask(__name__)
 # Road Configuration
 # ------------------------------------------------------------
 APPROACH_ROADS = ["road1", "road2", "road3", "road4"]
+ROAD_NAMES = ["Road 1", "Road 2", "Road 3", "Road 4"]
 STREAM_MANAGERS = get_stream_managers()
 
 # Persistent signal controller
@@ -47,31 +46,27 @@ CONTROLLER = decide_signal(config=None, lanes=APPROACH_ROADS)
 CURRENT_PHASE = {"lane": None, "end_time": 0.0}
 
 # ------------------------------------------------------------
-# API 1: Vehicle Count (on-demand YOLO detection)
+# API 1: Vehicle Count
 # ------------------------------------------------------------
 @app.route("/vehicle-count")
 def vehicle_count():
-    """Return live vehicle count and weight for each approach road."""
+    """Return live vehicle count keyed by Road 1..4."""
     road_stats = {}
     try:
-        for road in APPROACH_ROADS:
+        for road, road_name in zip(APPROACH_ROADS, ROAD_NAMES):
             manager = STREAM_MANAGERS.get(road)
             if not manager:
-                road_stats[road] = {"count": 0, "weight": 0}
+                road_stats[road_name] = {"count": 0, "weight": 0}
                 continue
 
             frame = manager.next_frame()
-            
             if frame is None:
-                print(f"[WARN] {road}: No frame received from stream manager!")
-                road_stats[road] = {"count": 0, "weight": 0}
+                road_stats[road_name] = {"count": 0, "weight": 0}
                 continue
-            else:
-                print(f"[INFO] {road}: Frame OK, shape={frame.shape}")
 
             detections = detect_vehicles(frame, model) or []
             weight_sum = sum(int(vehicle_weights.get(cls, 2)) for (_x, _y, _w, _h, cls) in detections)
-            road_stats[road] = {"count": len(detections), "weight": int(weight_sum)}
+            road_stats[road_name] = {"count": len(detections), "weight": int(weight_sum)}
 
         return jsonify(road_stats)
     except Exception as e:
@@ -79,45 +74,35 @@ def vehicle_count():
         return jsonify({"error": str(e)}), 500
 
 # ------------------------------------------------------------
-# API 2: Signal Status (AI-based signal decision)
+# API 2: Signal Status
 # ------------------------------------------------------------
 @app.route("/signal-status")
 def signal_status():
-    """
-    Decide which lane gets green next and return the cycle info.
-    Ensures fairness and prevents same lane from being continuously green.
-    """
+    """Return current signal cycle keyed by Road 1..4. Red time = 0."""
     try:
-        road_stats = {}
         controller_input = {}
         now = time.time()
 
         # Get counts from each road
-        for road in APPROACH_ROADS:
+        for road, road_name in zip(APPROACH_ROADS, ROAD_NAMES):
             manager = STREAM_MANAGERS.get(road)
             if not manager:
-                road_stats[road] = {"count": 0, "weight": 0}
                 controller_input[road] = 0
                 continue
 
             frame = manager.next_frame()
             if frame is None:
-                road_stats[road] = {"count": 0, "weight": 0}
                 controller_input[road] = 0
                 continue
 
             detections = detect_vehicles(frame, model) or []
             weight_sum = sum(int(vehicle_weights.get(cls, 2)) for (_x, _y, _w, _h, cls) in detections)
-
-            road_stats[road] = {"count": len(detections), "weight": weight_sum}
             controller_input[road] = weight_sum
 
         # -------------------------------
         # Decide green lane respecting CURRENT_PHASE
         # -------------------------------
-        # If current green is expired, select next lane
         if CURRENT_PHASE["lane"] is None or now >= CURRENT_PHASE["end_time"]:
-            # Pick lane using controller
             served_road = CONTROLLER.select_lane(controller_input)
 
             # Prevent same lane immediately repeating
@@ -130,19 +115,25 @@ def signal_status():
             CURRENT_PHASE["lane"] = served_road
             CURRENT_PHASE["end_time"] = now + green_time
         else:
-            # Maintain current green
             served_road = CURRENT_PHASE["lane"]
             green_time = CURRENT_PHASE["end_time"] - now
 
-        # Build cycle
-        cycle = CONTROLLER._format_cycle(served_road, green_time, controller_input)
+        # Build cycle dictionary keyed by Road X
+        cycle = {}
+        for road, road_name in zip(APPROACH_ROADS, ROAD_NAMES):
+            if road == served_road:
+                status = "Green"
+                time_val = int(round(green_time))
+            else:
+                status = "Red"
+                time_val = 0
+            cycle[road_name] = {"status": status, "time": time_val}
 
-        return jsonify({"cycle": cycle, "stats": road_stats})
+        return jsonify({"cycle": cycle})
 
     except Exception as e:
         print("Error in /signal-status:", e)
         return jsonify({"error": str(e)}), 500
-
 
 # ------------------------------------------------------------
 # Run Flask Server

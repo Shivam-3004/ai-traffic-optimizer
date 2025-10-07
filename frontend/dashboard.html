@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Traffic Monitoring Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+   
+</head>
+<body>
+    <div class="dashboard-container">
+    <div class="header">
+        <header>
+            <h1 class="heading_1">🚦 AI Traffic Monitoring Dashboard</h1>
+            <p class="below_heading">Real-time data from Flask API and YOLO detection</p>
+        <div id="status-message" class="mt-4 text-center text-sm font-medium p-2 rounded-lg bg-red-800/30 text-red-300 hidden">
+            API is currently disconnected or unreachable. Showing default data.
+        </div><hr>
+        </header>
+    </div>
+    <div class="main">
+        <main>
+            <!------------------- video z --------------------->
+            <div class="videoz">
+                <!-- Upper row: North & East -->
+                <div class="upper">
+                    <div class="video-box">
+                        <div class="videoz_header">
+                            <h2 class="north_heading">ROAD 1 (North)</h2>
+                            <p class="signal_status">
+                                <span id="signal-text-north" class="signal-red">Signal: Red</span> |
+                                <span id="time-left-north">Time: 0 sec</span>
+                            </p>
+                        </div>
+                        <div class="video">
+                            <video id="video-lane1" src="3285790-hd_1920_1080_30fps.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+                        </div>
+                        <div class="video_footer">
+                            <div class="text-center">
+                                <p class="vehicle_count" id="count-lane1">0</p>
+                                <p class="vehicle_weight">Vehicle Count</p>
+                            </div>
+                            <div class="weight">
+                                <p class="vehicle_count" id="weight-lane1">0</p>
+                                <p class="vehicle_weight">Vehicle Weight</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="videoz_header">
+                            <h2 class="north_heading">ROAD 2 (East)</h2>
+                            <p class="signal_status">
+                                <span id="signal-text-east" class="signal-red">Signal: Red</span> |
+                                <span id="time-left-east">Time: 0 sec</span>
+                            </p>
+                        </div>
+                        <div class="video">
+                            <video id="video-lane2" src="3285790-hd_1920_1080_30fps.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+                        </div>
+                        <div class="video_footer">
+                            <div class="text-center">
+                                <p class="vehicle_count" id="count-lane2">0</p>
+                                <p class="vehicle_weight">Vehicle Count</p>
+                            </div>
+                            <div class="weight">
+                                <p class="vehicle_count" id="weight-lane2">0</p>
+                                <p class="vehicle_weight">Vehicle Weight</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Lower row: South & West -->
+                <div class="lower">
+                    <div class="video-box">
+                        <div class="videoz_header">
+                            <h2 class="north_heading">ROAD 3 (South)</h2>
+                            <p class="signal_status">
+                                <span id="signal-text-south" class="signal-red">Signal: Red</span> |
+                                <span id="time-left-south">Time: 0 sec</span>
+                            </p>
+                        </div>
+                        <div class="video">
+                            <video id="video-lane3" src="3285790-hd_1920_1080_30fps.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+                        </div>
+                        <div class="video_footer">
+                            <div class="text-center">
+                                <p class="vehicle_count" id="count-lane3">0</p>
+                                <p class="vehicle_weight">Vehicle Count</p>
+                            </div>
+                            <div class="weight">
+                                <p class="vehicle_count" id="weight-lane3">0</p>
+                                <p class="vehicle_weight">Vehicle Weight</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="videoz_header">
+                            <h2 class="north_heading">ROAD 4 (West)</h2>
+                            <p class="signal_status">
+                                <span id="signal-text-west" class="signal-red">Signal: Red</span> |
+                                <span id="time-left-west">Time: 0 sec</span>
+                            </p>
+                        </div>
+                        <div class="video">
+                            <video id="video-lane4" src="3285790-hd_1920_1080_30fps.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+                        </div>
+                        <div class="video_footer">
+                            <div class="text-center">
+                                <p class="vehicle_count" id="count-lane4">0</p>
+                                <p class="vehicle_weight">Vehicle Count</p>
+                            </div>
+                            <div class="weight">
+                                <p class="vehicle_count" id="weight-lane4">0</p>
+                                <p class="vehicle_weight">Vehicle Weight</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div><hr>
+    <div class="footer">
+        <footer >
+        <div class="text_footer">
+            🚦 <b>AI Traffic Optimizer</b><br>
+            Built with <b>YOLO</b> | <b>Flask</b> | <b>HTML/Tailwind/JS</b> | <b>Python</b> 🐍<br>
+            🔗<a href="https://github.com/Shivam-3004/ai-traffic-optimizer">view on github</a>
+        </div>
+    </footer>
+
+    </div>
+    </div>
+</body>
+</html>
+</html>
