@@ -1,0 +1,842 @@
+[
+  {
+    "timestamp": "2025-10-06 20:02:48",
+    "cycle": {
+      "lane1": {
+        "status": "Green",
+        "time": 21
+      },
+      "lane2": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 26
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:02:50",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 21
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 26
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:02:52",
+    "cycle": {
+      "lane1": {
+        "status": "Green",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 27
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:02:54",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 22
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 27
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:02:56",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 23
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 28
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:02:58",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:43:52",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 25
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 20
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 25
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 25
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:43:52",
+    "cycle": {
+      "lane1": {
+        "status": "Green",
+        "time": 21
+      },
+      "lane2": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 26
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:43:55",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane2": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane3": {
+        "status": "Green",
+        "time": 21
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 26
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:43:55",
+    "cycle": {
+      "lane1": {
+        "status": "Green",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 27
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:43:57",
+    "cycle": {
+      "lane1": {
+        "status": "Green",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 27
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:43:58",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 22
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 27
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:00",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 23
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 28
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:00",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 23
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 28
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:03",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:03",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:06",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:06",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:08",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:08",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:11",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:11",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:13",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:14",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:16",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:16",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:18",
+    "cycle": {
+      "lane1": {
+        "status": "Green",
+        "time": 23
+      },
+      "lane2": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 28
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:19",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:21",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:21",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:23",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:23",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 20:44:26",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 24
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 29
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 29
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 21:03:29",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 25
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 20
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 25
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 25
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 21:03:32",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 21
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 26
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 26
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 21:03:34",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 22
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 27
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 21:03:36",
+    "cycle": {
+      "lane1": {
+        "status": "Green",
+        "time": 22
+      },
+      "lane2": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 27
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 27
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 21:03:39",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 23
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 28
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 21:03:41",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 23
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 28
+      }
+    }
+  },
+  {
+    "timestamp": "2025-10-06 21:03:44",
+    "cycle": {
+      "lane1": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane2": {
+        "status": "Green",
+        "time": 23
+      },
+      "lane3": {
+        "status": "Red",
+        "time": 28
+      },
+      "lane4": {
+        "status": "Red",
+        "time": 28
+      }
+    }
+  }
+]
