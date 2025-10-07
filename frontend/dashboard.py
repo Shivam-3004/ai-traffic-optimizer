@@ -43,7 +43,6 @@ cols = st.columns(2)
 for idx, lane in enumerate(lane_names):
     col = cols[idx % 2] if idx < 2 else cols[idx % 2].container()
     with col:
-# <<<<<<< ui-simulation
         # --- Lane name and signal in same row ---
         lane_col, signal_col = st.columns([1, 2])
         with lane_col:
