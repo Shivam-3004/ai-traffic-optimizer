@@ -11,7 +11,7 @@
     <div class="dashboard-container">
     <div class="header">
         <header>
-            <h1 class="heading_1">🚦 AI Traffic Monitoring Dashboard</h1>
+            <h1 class="heading_1"><span class="logo-info">🚦</span><span class="inner_text">AI Traffic Monitoring Dashboard</span> </h1>
             <p class="below_heading">Real-time data from Flask API and YOLO detection</p>
         <div id="status-message" class="mt-4 text-center text-sm font-medium p-2 rounded-lg bg-red-800/30 text-red-300 hidden">
             API is currently disconnected or unreachable. Showing default data.
@@ -26,14 +26,14 @@
                 <div class="upper">
                     <div class="video-box">
                         <div class="videoz_header">
-                            <h2 class="north_heading">ROAD 1 (North)</h2>
+                            <h2 class="north_heading">ROAD 1 </h2>
                             <p class="signal_status">
                                 <span id="signal-text-north" class="signal-red">Signal: Red</span> |
                                 <span id="time-left-north">Time: 0 sec</span>
                             </p>
                         </div>
                         <div class="video">
-                            <video id="video-lane1" src="3285790-hd_1920_1080_30fps.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+                            <video id="video-lane1" src="/backend/video_input/videos/t4.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
                         </div>
                         <div class="video_footer">
                             <div class="text-center">
@@ -48,14 +48,14 @@
                     </div>
                     <div class="video-box">
                         <div class="videoz_header">
-                            <h2 class="north_heading">ROAD 2 (East)</h2>
+                            <h2 class="north_heading">ROAD 2 </h2>
                             <p class="signal_status">
                                 <span id="signal-text-east" class="signal-red">Signal: Red</span> |
                                 <span id="time-left-east">Time: 0 sec</span>
                             </p>
                         </div>
                         <div class="video">
-                            <video id="video-lane2" src="3285790-hd_1920_1080_30fps.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+                            <video id="video-lane2" src="/backend/video_input/videos/t2.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
                         </div>
                         <div class="video_footer">
                             <div class="text-center">
@@ -73,14 +73,14 @@
                 <div class="lower">
                     <div class="video-box">
                         <div class="videoz_header">
-                            <h2 class="north_heading">ROAD 3 (South)</h2>
+                            <h2 class="north_heading">ROAD 3</h2>
                             <p class="signal_status">
                                 <span id="signal-text-south" class="signal-red">Signal: Red</span> |
                                 <span id="time-left-south">Time: 0 sec</span>
                             </p>
                         </div>
                         <div class="video">
-                            <video id="video-lane3" src="3285790-hd_1920_1080_30fps.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+                            <video id="video-lane3" src="/backend/video_input/videos/t3.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
                         </div>
                         <div class="video_footer">
                             <div class="text-center">
@@ -95,14 +95,14 @@
                     </div>
                     <div class="video-box">
                         <div class="videoz_header">
-                            <h2 class="north_heading">ROAD 4 (West)</h2>
+                            <h2 class="north_heading">ROAD 4</h2>
                             <p class="signal_status">
                                 <span id="signal-text-west" class="signal-red">Signal: Red</span> |
                                 <span id="time-left-west">Time: 0 sec</span>
                             </p>
                         </div>
                         <div class="video">
-                            <video id="video-lane4" src="3285790-hd_1920_1080_30fps.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+                            <video id="video-lane4" src="/backend/video_input/videos/t1.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
                         </div>
                         <div class="video_footer">
                             <div class="text-center">
@@ -130,6 +130,9 @@
 
     </div>
     </div>
+
+  <script src="dashboard.js"></script>
+
 </body>
 </html>
 </html>
