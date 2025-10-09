@@ -17,6 +17,7 @@ import time
 import math
 from datetime import datetime
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
+import tempfile
 
 DEFAULT_CONFIG = {
     # Green timing model (realistic defaults for urban/arterial intersections)
@@ -50,6 +51,14 @@ class decide_signal:
         self.config = DEFAULT_CONFIG.copy()
         if config:
             self.config.update(config)
+
+        # If the user didn't override the default log_file, move logging to the
+        # system temp directory to avoid editors / live-reload watchers seeing
+        # frequent writes inside the project tree which can trigger page reloads.
+        default_log = DEFAULT_CONFIG.get("log_file")
+        if str(self.config.get("log_file", "")) == str(default_log):
+            temp_log = os.path.join(tempfile.gettempdir(), "ai_traffic_log.json")
+            self.config["log_file"] = temp_log
 
         # Timing & control params
         self.base_time = float(self.config["base_time"])

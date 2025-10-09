@@ -35,6 +35,11 @@ from backend.detection.model_utils import vehicle_weights
 from ultralytics import YOLO
 import sys, os, time
 import threading
+import atexit
+
+# Process-level start info for debugging restarts
+START_TIME = time.time()
+PID = os.getpid()
 
 # Path setup: allow running this module directly in various CWDs
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
@@ -181,9 +186,17 @@ def signal_status():
 
 
 # If run directly, start the Flask dev server. In production use a WSGI server.
+@app.route("/meta")
+def meta():
+    """Return process metadata so clients can detect server restarts (PID/start_time)."""
+    return jsonify({"pid": PID, "start_time": int(START_TIME)})
+
+
 if __name__ == "__main__":
     print("🚦 AI Traffic Light Optimizer API Running on http://127.0.0.1:5000")
     print("✅ Routes available:")
     print("   → /vehicle-count  (for live counts)")
     print("   → /signal-status  (for signal decision)")
-    app.run(debug=True, port=5000)
+    # Run without the debugger to ensure no auto-reload/watchers will restart the process
+    # when the controller writes logs. Enable threaded to handle concurrent requests.
+    app.run(debug=False, port=5000, use_reloader=False, threaded=True)
