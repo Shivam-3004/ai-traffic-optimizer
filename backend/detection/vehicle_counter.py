@@ -81,3 +81,94 @@ def update_tracks(detections, tracked_objects, next_vehicle_id):
             total_weight += 2
 
     return count, total_weight, new_tracked, next_vehicle_id
+
+
+def draw_detections_on_frame(frame, detections):
+    """Return a copy of the frame with bounding boxes and class labels drawn.
+
+    detections: iterable of (x, y, w, h, class_name) or (x,y,w,h,class_name,score)
+    """
+    if frame is None:
+        return None
+
+    out = frame.copy()
+    for det in detections:
+        if len(det) == 6:
+            x, y, w, h, cls, score = det
+            label = f"{cls}:{score:.2f}"
+        else:
+            x, y, w, h, cls = det
+            label = f"{cls}"
+
+        x1, y1, x2, y2 = int(x), int(y), int(x + w), int(y + h)
+        color = (0, 255, 0)
+        cv2.rectangle(out, (x1, y1), (x2, y2), color, 2)
+        # label background
+        (tw, th), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
+        cv2.rectangle(out, (x1, y1 - th - 6), (x1 + tw, y1), color, -1)
+        cv2.putText(out, label, (x1, y1 - 4), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+
+    return out
+
+
+def create_trackers(frame, detections, tracker_type='MOSSE'):
+    """Create OpenCV trackers for given detections.
+
+    detections: iterable of (x,y,w,h, class_name) or (x,y,w,h,class_name,score)
+    Returns: list of (tracker, class_name)
+    """
+    trackers = []
+    if frame is None:
+        return trackers
+
+    for det in detections:
+        try:
+            if len(det) >= 5:
+                x, y, w, h, cls = det[0], det[1], det[2], det[3], det[4]
+            else:
+                continue
+
+            x1, y1, w_i, h_i = int(x), int(y), int(w), int(h)
+            bbox = (x1, y1, w_i, h_i)
+
+            # choose tracker
+            if tracker_type == 'CSRT' and hasattr(cv2, 'TrackerCSRT_create'):
+                tr = cv2.TrackerCSRT_create()
+            elif hasattr(cv2, 'TrackerMOSSE_create'):
+                tr = cv2.TrackerMOSSE_create()
+            else:
+                # fallback to MOSSE-like or raise
+                tr = cv2.TrackerMOSSE_create()
+
+            tr.init(frame, bbox)
+            trackers.append((tr, cls))
+        except Exception:
+            continue
+
+    return trackers
+
+
+def update_trackers(frame, trackers):
+    """Update trackers on the given frame.
+
+    Returns: boxes, new_trackers
+      boxes: list of (x,y,w,h,class_name)
+      new_trackers: list of (tracker, class_name)
+    """
+    boxes = []
+    new_trackers = []
+    if frame is None:
+        return boxes, new_trackers
+
+    for tr, cls in trackers:
+        try:
+            ok, bbox = tr.update(frame)
+            if not ok:
+                continue
+            x, y, w, h = bbox
+            boxes.append((float(x), float(y), float(w), float(h), cls))
+            new_trackers.append((tr, cls))
+        except Exception:
+            continue
+
+    return boxes, new_trackers

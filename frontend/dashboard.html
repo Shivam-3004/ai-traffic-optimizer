@@ -101,8 +101,9 @@
                                 <span id="time-left-west">Time: 0 sec</span>
                             </p>
                         </div>
-                        <div class="video">
-                            <video id="video-lane4" src="/backend/video_input/videos/t1.mp4" autoplay loop muted class="w-full h-full object-cover"></video>
+                        <div class="video" style="position:relative;">
+                            <img id="video-lane4" src="http://127.0.0.1:5000/raw-stream/road4" class="w-full h-full object-cover" alt="Road 4 live camera" />
+                            <canvas id="overlay-lane4" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;"></canvas>
                         </div>
                         <div class="video_footer">
                             <div class="text-center">
