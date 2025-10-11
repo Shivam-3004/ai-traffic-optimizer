@@ -33,6 +33,8 @@ from backend.detection.vehicle_counter import detect_vehicles
 from backend.logic.signal_controller import decide_signal
 from backend.detection.model_utils import vehicle_weights
 from ultralytics import YOLO
+import cv2
+from flask import Response
 import sys, os, time
 import threading
 import atexit
@@ -70,6 +72,80 @@ CONTROLLER = decide_signal(config=None, lanes=APPROACH_ROADS)
 # Use PHASE_LOCK to avoid races when multiple HTTP clients call /signal-status concurrently.
 CURRENT_PHASE = {"lane": None, "end_time": 0.0}
 PHASE_LOCK = threading.Lock()
+
+# Note: annotated-frame workers and /detected-* endpoints have been removed.
+
+# Lightweight detection cache for live overlay (run for live camera road(s))
+_DETECTION_CACHE = {}  # road -> {boxes: [...], width: int, height: int, ts: float}
+_DETECTION_LOCK = threading.Lock()
+_DETECT_THREAD = None
+_DETECT_RUNNING = True
+_INFERENCE_LOCK = threading.Lock()
+DETECT_INTERVAL = 0.35  # seconds between detections for overlay
+
+
+def _detection_worker(road, manager):
+    """Run detection periodically on frames from manager and cache box coords."""
+    global _DETECT_RUNNING
+    while _DETECT_RUNNING:
+        try:
+            frame = manager.next_frame()
+            if frame is None:
+                time.sleep(0.05)
+                continue
+
+            # run detection (serialize access to model)
+            try:
+                with _INFERENCE_LOCK:
+                    dets = detect_vehicles(frame, model) or []
+            except Exception:
+                dets = []
+
+            # try to get frame size
+            try:
+                h, w = frame.shape[:2]
+            except Exception:
+                w, h = None, None
+
+            # normalize boxes as dicts
+            boxes = []
+            for d in dets:
+                try:
+                    if len(d) >= 5:
+                        x, y, ww, hh, cls = d[0], d[1], d[2], d[3], d[4]
+                    else:
+                        continue
+                    boxes.append({"x": float(x), "y": float(y), "w": float(ww), "h": float(hh), "class": str(cls)})
+                except Exception:
+                    continue
+
+            with _DETECTION_LOCK:
+                _DETECTION_CACHE[road] = {"boxes": boxes, "width": w, "height": h, "ts": time.time()}
+
+            time.sleep(DETECT_INTERVAL)
+        except Exception:
+            time.sleep(0.1)
+
+
+def start_detection_for_road(road):
+    global _DETECT_THREAD
+    manager = STREAM_MANAGERS.get(road)
+    if manager is None:
+        return
+    if _DETECT_THREAD is not None and _DETECT_THREAD.is_alive():
+        return
+    _DETECT_THREAD = threading.Thread(target=_detection_worker, args=(road, manager), daemon=True)
+    _DETECT_THREAD.start()
+
+
+def stop_detection():
+    global _DETECT_RUNNING
+    _DETECT_RUNNING = False
+
+# start detection for live road4 if present
+if 'road4' in STREAM_MANAGERS:
+    start_detection_for_road('road4')
+    atexit.register(stop_detection)
 
 
 @app.route("/vehicle-count")
@@ -190,6 +266,95 @@ def signal_status():
 def meta():
     """Return process metadata so clients can detect server restarts (PID/start_time)."""
     return jsonify({"pid": PID, "start_time": int(START_TIME)})
+
+
+@app.route("/stream-status")
+def stream_status():
+    """Return current stream sources and timestamps for each road.
+
+    Response example:
+    {
+      "Road 1": {"source": "...", "is_camera": true/false, "last_frame_time": 169...},
+      ...
+    }
+    """
+    status = {}
+    try:
+        for road, road_name in zip(APPROACH_ROADS, ROAD_NAMES):
+            manager = STREAM_MANAGERS.get(road)
+            if manager is None:
+                status[road_name] = {"source": None, "is_camera": False, "last_frame_time": None}
+                continue
+
+            # Prefer manager.get_status() if present
+            try:
+                mstatus = manager.get_status()
+            except Exception:
+                mstatus = None
+
+            if mstatus:
+                status[road_name] = mstatus
+            else:
+                status[road_name] = {"source": getattr(manager, "source", None), "is_camera": False, "last_frame_time": None}
+
+        return jsonify(status)
+    except Exception as e:
+        print("Error in /stream-status:", e)
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/raw-stream/<road>')
+def raw_stream(road):
+    """Return an MJPEG stream of raw frames from the underlying stream manager.
+
+    This is lightweight: it pulls frames from `STREAM_MANAGERS[road].next_frame()`
+    and encodes them to JPEG on the fly.
+    """
+    manager = STREAM_MANAGERS.get(road)
+    if manager is None:
+        return jsonify({'error': 'unknown road'}), 404
+
+    def gen():
+        boundary = b'--frame'
+        while True:
+            try:
+                frame = manager.next_frame()
+                if frame is None:
+                    time.sleep(0.05)
+                    continue
+                ret, buf = cv2.imencode('.jpg', frame)
+                if not ret:
+                    time.sleep(0.05)
+                    continue
+                jpeg = buf.tobytes()
+                yield boundary + b"\r\n"
+                yield b"Content-Type: image/jpeg\r\n"
+                yield f"Content-Length: {len(jpeg)}\r\n\r\n".encode('utf-8')
+                yield jpeg + b"\r\n"
+                time.sleep(0.02)
+            except GeneratorExit:
+                break
+            except Exception:
+                time.sleep(0.05)
+
+    return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+
+@app.route('/detection-boxes/<road>')
+def detection_boxes(road):
+    """Return the latest detection boxes for the road (cached by detection worker)."""
+    try:
+        with _DETECTION_LOCK:
+            entry = _DETECTION_CACHE.get(road)
+            if not entry:
+                return jsonify({"boxes": [], "width": None, "height": None, "ts": None})
+            return jsonify(entry)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# detected-frame and detected-stream endpoints removed in revert
 
 
 if __name__ == "__main__":
