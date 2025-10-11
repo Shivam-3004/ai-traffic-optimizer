@@ -93,6 +93,9 @@ body {
     border: 1px solid #2D333B; /* Subtle border */
 }
 
+/* allow absolute overlays inside a video box (camera control overlay) */
+.video-box { position: relative; }
+
 .video-box:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); /* Stronger glow on hover */
@@ -153,6 +156,116 @@ body {
     height: 100%;
     object-fit: cover;
 }
+
+/* make images and videos share the same rounded corners and overflow behavior */
+.video img, .video video {
+        border-bottom-left-radius: 0; /* footer has its own box rounding */
+}
+
+/* Road 4 overlay specific */
+.video-with-overlay { position: relative; }
+.overlay-canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+}
+
+/* Camera control strip */
+.camera-controls {
+    /* small overlay in top-right of the box so it doesn't shift layout */
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(8,11,14,0.18);
+    padding: 6px 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.03);
+    z-index: 30;
+    opacity: 0.6;
+    transition: opacity 0.18s ease, transform 0.12s ease;
+}
+.camera-controls:hover, .camera-controls:focus-within { opacity: 1; transform: translateY(-2px); }
+.camera-help { color: #94A3B8; font-size: 0.72rem; }
+.camera-select {
+    background: transparent;
+    color: #E6EDF3;
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    display: none; /* keep the select hidden until user hovers or activates to avoid visual clutter */
+}
+.camera-select option { background: #0F1724; color: #E6EDF3; }
+.camera-controls:hover .camera-select, .camera-controls:focus-within .camera-select { display: inline-block; }
+.camera-controls .camera-help { display: none; }
+.camera-controls:hover .camera-help, .camera-controls:focus-within .camera-help { display: inline-block; }
+
+/* show select/help also when control is active (toggled on) */
+.camera-controls.active .camera-select { display: inline-block; }
+.camera-controls.active .camera-help { display: inline-block; }
+
+/* hide the text label to keep the control minimal; reveal via hover if desired */
+.ctrl-label { display: none; }
+
+/* camera icon button */
+.camera-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.02);
+    color: #E6EDF3;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+.camera-btn:hover { background: rgba(255,255,255,0.03); }
+
+/* if you want to show a subtle active state when JS checks the hidden checkbox, add a simple rule that JS can toggle by adding a class to .camera-controls (keeps CSS-only minimal) */
+.camera-controls.active .camera-btn { box-shadow: 0 0 6px rgba(16,185,129,0.18); }
+
+/* Compact toggle switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 18px;
+}
+.switch input { display: none; }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #2F3540;
+    transition: 0.18s;
+    border-radius: 20px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    left: 3px;
+    top: 3px;
+    background-color: #fff;
+    transition: 0.18s;
+    border-radius: 50%;
+}
+.switch input:checked + .slider { background-color: #10B981; }
+.switch input:checked + .slider:before { transform: translateX(12px); }
+.ctrl-label { font-size: 0.85rem; color: #94A3B8; margin-left: 4px; }
+
+/* utility */
+.hidden { display: none !important; }
 
 /* Ensure images used for raw MJPEG streams match the video sizing and do not overflow */
 .video img {

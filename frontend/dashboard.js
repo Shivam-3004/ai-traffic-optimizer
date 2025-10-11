@@ -111,10 +111,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }).catch(() => { camHelp.textContent = 'Unable to list cameras'; });
   if (toggle) {
     // Ensure initial visibility state
-    if (fileVid) { fileVid.style.display = 'block'; fileVid.play().catch(()=>{}); }
+    if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
     if (img) { img.style.display = 'none'; img.src = ''; }
+    // find parent controls container so we can toggle an active class for visuals
+    const controlsContainer = document.querySelector('.camera-controls');
 
     toggle.addEventListener('change', (ev) => {
+      // sync active class for UI subtle reveal
+      if (controlsContainer) {
+        if (ev.target.checked) controlsContainer.classList.add('active'); else controlsContainer.classList.remove('active');
+      }
       const on = ev.target.checked;
       if (on) {
         // ask server to switch source to camera first
@@ -161,6 +167,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     // default: leave file video visible; toggle off
     toggle.checked = false;
+    // ensure file videos attempt playback after DOM load (help with autoplay policies)
+    try {
+      document.querySelectorAll('video').forEach(v => { v.muted = true; v.playsInline = true; v.play().catch(()=>{}); });
+    } catch (e) {}
   }
 });
 
