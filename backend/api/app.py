@@ -29,12 +29,14 @@ Behavioral contract (API outputs):
 from flask import Flask, jsonify
 from flask_cors import CORS
 from backend.video_input.video_common import get_stream_managers
-from backend.detection.vehicle_counter import detect_vehicles
+from backend.detection.vehicle_counter import detect_vehicles, draw_detections_on_frame
 from backend.logic.signal_controller import decide_signal
 from backend.detection.model_utils import vehicle_weights
 from ultralytics import YOLO
 import cv2
-from flask import Response
+from flask import Response, request
+from backend.video_input import video_common
+from backend.video_input.stream_manager import VideoStreamManager
 import sys, os, time
 import threading
 import atexit
@@ -64,6 +66,12 @@ ROAD_NAMES = ["Road 1", "Road 2", "Road 3", "Road 4"]
 
 # Stream managers provide non-blocking access to the latest frame for each road.
 STREAM_MANAGERS = get_stream_managers()
+
+# Toggle: if True, the background detection worker runs and caches boxes for overlays.
+# If False (default), detection is performed on-demand when endpoints are called or
+# when a client connects to the raw stream. This prevents the camera being opened
+# and inference running constantly when no clients are connected.
+BACKGROUND_DET = False
 
 # Persistent controller instance (handles EWMA smoothing, starvation, logging)
 CONTROLLER = decide_signal(config=None, lanes=APPROACH_ROADS)
@@ -142,8 +150,8 @@ def stop_detection():
     global _DETECT_RUNNING
     _DETECT_RUNNING = False
 
-# start detection for live road4 if present
-if 'road4' in STREAM_MANAGERS:
+# start detection for live road4 only when BACKGROUND_DET is enabled
+if BACKGROUND_DET and 'road4' in STREAM_MANAGERS:
     start_detection_for_road('road4')
     atexit.register(stop_detection)
 
@@ -305,10 +313,10 @@ def stream_status():
 
 @app.route('/raw-stream/<road>')
 def raw_stream(road):
-    """Return an MJPEG stream of raw frames from the underlying stream manager.
+    """Return an MJPEG stream of annotated frames (runs detection per-frame).
 
-    This is lightweight: it pulls frames from `STREAM_MANAGERS[road].next_frame()`
-    and encodes them to JPEG on the fly.
+    This endpoint performs one-shot detection per-frame and draws boxes. The
+    camera / video source will be accessed only while a client is connected.
     """
     manager = STREAM_MANAGERS.get(road)
     if manager is None:
@@ -316,40 +324,177 @@ def raw_stream(road):
 
     def gen():
         boundary = b'--frame'
-        while True:
-            try:
-                frame = manager.next_frame()
-                if frame is None:
+        try:
+            while True:
+                try:
+                    frame = manager.next_frame()
+                    if frame is None:
+                        time.sleep(0.05)
+                        continue
+
+                    # perform one-shot detection (protect model with _INFERENCE_LOCK)
+                    try:
+                        with _INFERENCE_LOCK:
+                            dets = detect_vehicles(frame, model) if model is not None else []
+                    except Exception:
+                        dets = []
+
+                    # draw boxes onto a copy
+                    try:
+                        annotated = draw_detections_on_frame(frame, dets) or frame
+                    except Exception:
+                        annotated = frame
+
+                    ret, buf = cv2.imencode('.jpg', annotated)
+                    if not ret:
+                        time.sleep(0.02)
+                        continue
+                    jpeg = buf.tobytes()
+                    yield boundary + b"\r\n"
+                    yield b"Content-Type: image/jpeg\r\n"
+                    yield f"Content-Length: {len(jpeg)}\r\n\r\n".encode('utf-8')
+                    yield jpeg + b"\r\n"
+                    time.sleep(DETECT_INTERVAL)
+                except GeneratorExit:
+                    break
+                except Exception:
                     time.sleep(0.05)
-                    continue
-                ret, buf = cv2.imencode('.jpg', frame)
-                if not ret:
-                    time.sleep(0.05)
-                    continue
-                jpeg = buf.tobytes()
-                yield boundary + b"\r\n"
-                yield b"Content-Type: image/jpeg\r\n"
-                yield f"Content-Length: {len(jpeg)}\r\n\r\n".encode('utf-8')
-                yield jpeg + b"\r\n"
-                time.sleep(0.02)
-            except GeneratorExit:
-                break
-            except Exception:
-                time.sleep(0.05)
+        finally:
+            # nothing to explicitly clean up here; VideoStreamManager remains
+            return
 
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/switch-source', methods=['POST', 'GET'])
+def switch_source():
+    """Switch the underlying source for a given road at runtime.
+
+    Query / JSON params:
+      road: e.g. 'road4'
+      mode: 'camera' or 'file'
+
+    This will release the previous VideoStreamManager (if any) and create a new
+    one. Use with care: opening the camera will attempt to access the webcam.
+    """
+    try:
+        # support both JSON POST and querystring GET
+        data = request.get_json(silent=True) or request.args
+        road = data.get('road')
+        mode = data.get('mode')
+        if not road or mode not in ('camera', 'file'):
+            return jsonify({'error': 'invalid parameters, require road and mode=camera|file'}), 400
+
+        if road not in APPROACH_ROADS:
+            return jsonify({'error': 'unknown road'}), 400
+
+        # Release old manager if present
+        old = STREAM_MANAGERS.get(road)
+        if old:
+            try:
+                old.release()
+            except Exception:
+                pass
+            # give OS a short moment to release device handles (Windows)
+            time.sleep(0.2)
+
+        # Create new manager based on mode
+        if mode == 'camera':
+            # allow optional camera index param (query or JSON)
+            idx = data.get('index')
+            try:
+                if idx is not None:
+                    src = int(idx)
+                else:
+                    src = 0
+            except Exception:
+                return jsonify({'error': 'invalid index parameter'}), 400
+        else:
+            # Use default file path from video_common
+            src = video_common.DEFAULT_VIDEO_PATHS.get(road)
+            if not src or not os.path.exists(src):
+                return jsonify({'error': f'video file for {road} not found'}), 404
+
+        try:
+            STREAM_MANAGERS[road] = VideoStreamManager(src)
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+        return jsonify({'ok': True, 'road': road, 'mode': mode, 'source': str(src)})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/list-cameras')
+def list_cameras():
+    """Probe camera indices 0..6 and report which ones open and return frames.
+
+    This endpoint is a diagnostic helper and should be fast. It does not keep
+    camera handles open after probing.
+    """
+    results = []
+    try:
+        max_index = 6
+        for i in range(0, max_index + 1):
+            try:
+                cap = cv2.VideoCapture(i)
+                opened = bool(cap.isOpened())
+                read_ok = False
+                if opened:
+                    ret, frame = cap.read()
+                    read_ok = bool(ret and frame is not None)
+                results.append({'index': i, 'opened': opened, 'read': read_ok})
+            except Exception:
+                results.append({'index': i, 'opened': False, 'read': False})
+            finally:
+                try:
+                    cap.release()
+                except Exception:
+                    pass
+        return jsonify({'results': results})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 
 @app.route('/detection-boxes/<road>')
 def detection_boxes(road):
-    """Return the latest detection boxes for the road (cached by detection worker)."""
+    """Return a snapshot of detection boxes for a road.
+
+    If background caching is enabled (BACKGROUND_DET=True) the cached boxes are
+    returned. Otherwise a one-shot detection is performed on the latest frame.
+    """
     try:
-        with _DETECTION_LOCK:
-            entry = _DETECTION_CACHE.get(road)
-            if not entry:
-                return jsonify({"boxes": [], "width": None, "height": None, "ts": None})
-            return jsonify(entry)
+        if BACKGROUND_DET:
+            with _DETECTION_LOCK:
+                entry = _DETECTION_CACHE.get(road)
+                if not entry:
+                    return jsonify({"boxes": [], "width": None, "height": None, "ts": None})
+                return jsonify(entry)
+
+        # one-shot detection path
+        manager = STREAM_MANAGERS.get(road)
+        if manager is None:
+            return jsonify({"boxes": [], "width": None, "height": None, "ts": None}), 404
+
+        frame = manager.next_frame()
+        if frame is None:
+            return jsonify({"boxes": [], "width": None, "height": None, "ts": None})
+
+        try:
+            with _INFERENCE_LOCK:
+                dets = detect_vehicles(frame, model) if model is not None else []
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+        boxes = []
+        h, w = frame.shape[:2]
+        for d in dets:
+            if len(d) >= 5:
+                x, y, bw, bh, cls = d[0], d[1], d[2], d[3], d[4]
+                boxes.append({"x": float(x), "y": float(y), "w": float(bw), "h": float(bh), "class": str(cls)})
+
+        return jsonify({"boxes": boxes, "width": int(w), "height": int(h), "ts": time.time()})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

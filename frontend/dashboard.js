@@ -93,7 +93,75 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchData();
   setInterval(fetchData, REFRESH_INTERVAL);
   // start overlay polling for road4
-  startOverlayPolling('road4');
+  // overlay polling is started only when camera live is enabled; initialize UI
+  const toggle = document.getElementById('toggle-road4');
+  const img = document.getElementById('video-lane4');
+  const fileVid = document.getElementById('video-lane4-file');
+  const camSelect = document.getElementById('camera-index-road4');
+  const camHelp = document.getElementById('camera-index-help');
+  // populate camera index select from server
+  fetch(`${BASE_URL}/list-cameras`).then(r => r.json()).then((data) => {
+    if (!data || !data.results) return;
+    data.results.forEach(entry => {
+      const opt = document.createElement('option');
+      opt.value = entry.index;
+      opt.textContent = `${entry.index} - ${entry.opened ? (entry.read ? 'available' : 'no-frame') : 'not-opened'}`;
+      camSelect.appendChild(opt);
+    });
+  }).catch(() => { camHelp.textContent = 'Unable to list cameras'; });
+  if (toggle) {
+    // Ensure initial visibility state
+    if (fileVid) { fileVid.style.display = 'block'; fileVid.play().catch(()=>{}); }
+    if (img) { img.style.display = 'none'; img.src = ''; }
+
+    toggle.addEventListener('change', (ev) => {
+      const on = ev.target.checked;
+      if (on) {
+        // ask server to switch source to camera first
+        // ask server to switch source to camera first, include selected index
+        const idx = camSelect ? camSelect.value : undefined;
+        const url = idx ? `${BASE_URL}/switch-source?road=road4&mode=camera&index=${idx}` : `${BASE_URL}/switch-source?road=road4&mode=camera`;
+        // show a quick status while switching
+        camHelp.textContent = 'Switching to camera...';
+        fetch(url, { method: 'GET' })
+          .then(r => r.json())
+          .then((res) => {
+            if (res.ok) {
+              // hide and pause file video to ensure only camera runs
+              if (fileVid) { try { fileVid.pause(); } catch(e){}; fileVid.style.display = 'none'; }
+              img.src = `${BASE_URL}/raw-stream/road4`;
+              img.style.display = 'block';
+              startOverlayPolling('road4');
+              camHelp.textContent = 'Camera live';
+            } else {
+              console.error('switch-source failed', res);
+              toggle.checked = false;
+            }
+          }).catch((e) => { console.error(e); toggle.checked = false; });
+      } else {
+        // switch back to file: ask server to create file-based manager and release camera
+        // switch back to file: ask server to create file-based manager and release camera
+        camHelp.textContent = 'Switching to file...';
+        fetch(`${BASE_URL}/switch-source?road=road4&mode=file`, { method: 'GET' })
+          .then(r => r.json())
+          .then((res) => {
+            if (res.ok) {
+              // stop camera image polling and hide it
+              stopOverlayPolling();
+              if (img) { img.src = ''; img.style.display = 'none'; }
+              // show and play file video
+              if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
+              camHelp.textContent = 'File playback';
+            } else {
+              console.error('switch-source failed', res);
+              toggle.checked = true;
+            }
+          }).catch((e) => { console.error(e); toggle.checked = true; });
+      }
+    });
+    // default: leave file video visible; toggle off
+    toggle.checked = false;
+  }
 });
 
 
@@ -156,11 +224,17 @@ function startOverlayPolling(road) {
       .then(drawBoxes)
       .catch(() => {});
   }
-
   // start interval
   _overlayTimer = setInterval(poll, OVERLAY_DETECT_INTERVAL);
   // initial poll
   poll();
   // resize when window changes
   window.addEventListener('resize', resizeCanvas);
+}
+
+function stopOverlayPolling() {
+  if (_overlayTimer) {
+    clearInterval(_overlayTimer);
+    _overlayTimer = null;
+  }
 }

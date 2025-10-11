@@ -13,10 +13,39 @@ class VideoStreamManager:
     def __init__(self, source):
         # Accept either an int (camera index) or a filesystem path/URL
         self.source = source
-        self.cap = cv2.VideoCapture(source)
-        if not self.cap.isOpened():
-            # helpful error message includes the source repr
-            raise RuntimeError(f"Cannot open video source: {repr(source)}")
+        # Try multiple backends for camera indices on Windows which often
+        # need DirectShow or Media Foundation to access external webcams.
+        self.cap = None
+        tried = []
+        def try_open(src, api_preference=None):
+            try:
+                if api_preference is None:
+                    c = cv2.VideoCapture(src)
+                else:
+                    c = cv2.VideoCapture(src, api_preference)
+                return c
+            except Exception:
+                return None
+
+        # If source looks like a camera index (int), try DSHOW -> MSMF -> default
+        if isinstance(source, int):
+            # prefer DirectShow on Windows
+            for api in [getattr(cv2, 'CAP_DSHOW', None), getattr(cv2, 'CAP_MSMF', None), None]:
+                if api is None:
+                    c = try_open(source, None)
+                else:
+                    c = try_open(source, api)
+                tried.append((source, api, bool(c and c.isOpened())))
+                if c is not None and c.isOpened():
+                    self.cap = c
+                    break
+        else:
+            # file path or URL: default open
+            self.cap = try_open(source, None)
+
+        if self.cap is None or not self.cap.isOpened():
+            # helpful error message includes the source repr and backends tried
+            raise RuntimeError(f"Cannot open video source: {repr(source)}; tried: {tried}")
         self.lock = threading.Lock()
         # determine if this is a camera (int) or file-like source
         self._is_camera = isinstance(source, int) or (isinstance(source, str) and source.isdigit())
