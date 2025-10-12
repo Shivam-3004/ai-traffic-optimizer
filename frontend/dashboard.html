@@ -33,7 +33,7 @@
                             </p>
                         </div>
                         <div class="video">
-                            <video id="video-lane1" src="../backend/video_input/videos/t4.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                            <video id="video-lane1" src="../backend/video_input/videos/t1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
                         </div>
                         <div class="video_footer">
                             <div class="text-center">
@@ -97,18 +97,18 @@
                         <div class="videoz_header">
                             <h2 class="north_heading">ROAD 4</h2>
                             <div style="display:flex;align-items:center;gap:12px;">
+                                <!-- camera control BEFORE signal text as requested -->
+                                    <div class="camera-controls-inline">
+                                        <!-- keep the hidden checkbox for JS; camera button sits inline before signal -->
+                                        <input type="checkbox" id="toggle-road4" style="display:none;" />
+                                        <label class="camera-btn" for="toggle-road4" title="Toggle live camera">📷</label>
+                                        <select id="camera-index-road4" class="camera-select" aria-label="Camera index"></select>
+                                        <small id="camera-index-help" class="camera-help">(select external)</small>
+                                    </div>
                                 <p class="signal_status" style="margin:0;">
                                     <span id="signal-text-west" class="signal-red">Signal: Red</span> |
                                     <span id="time-left-west">Time: 0 sec</span>
                                 </p>
-                                <!-- compact control strip for camera toggle + select -->
-                                <div class="camera-controls" aria-hidden="false">
-                                    <!-- hidden checkbox kept for JS compatibility; label toggles it -->
-                                    <input type="checkbox" id="toggle-road4" style="display:none;" />
-                                    <label class="camera-btn" for="toggle-road4" title="Toggle live camera">📷</label>
-                                    <select id="camera-index-road4" class="camera-select" aria-label="Camera index"></select>
-                                    <small id="camera-index-help" class="camera-help">(select external)</small>
-                                </div>
                             </div>
                         </div>
                         <div class="video video-with-overlay">
@@ -116,6 +116,11 @@
                             <video id="video-lane4-file" src="../backend/video_input/videos/t4.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
                             <!-- Image element for the MJPEG camera stream; src set on-demand by JS -->
                             <img id="video-lane4" src="" class="hidden" alt="Road 4 live camera" />
+                            <!-- loading indicator shown while the MJPEG stream connects -->
+                            <div id="stream-loading-lane4" class="stream-loading hidden" aria-hidden="true">
+                                <span class="spinner" aria-hidden="true"></span>
+                                <span class="sr-only">Connecting camera...</span>
+                            </div>
                             <canvas id="overlay-lane4" class="overlay-canvas" ></canvas>
                         </div>
                         <div class="video_footer">

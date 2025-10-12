@@ -157,6 +157,12 @@ body {
     object-fit: cover;
 }
 
+/* Ensure video and img are on top of the canvas overlay to avoid being hidden */
+.video video, .video img {
+    position: relative;
+    z-index: 15;
+}
+
 /* make images and videos share the same rounded corners and overflow behavior */
 .video img, .video video {
         border-bottom-left-radius: 0; /* footer has its own box rounding */
@@ -165,12 +171,13 @@ body {
 /* Road 4 overlay specific */
 .video-with-overlay { position: relative; }
 .overlay-canvas {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* don't block clicks */
+    z-index: 5; /* keep it above the video but below UI controls */
 }
 
 /* Camera control strip */
@@ -186,7 +193,7 @@ body {
     padding: 6px 8px;
     border-radius: 10px;
     border: 1px solid rgba(255,255,255,0.03);
-    z-index: 30;
+    z-index: 40;
     opacity: 0.6;
     transition: opacity 0.18s ease, transform 0.12s ease;
 }
@@ -231,6 +238,67 @@ body {
 
 /* if you want to show a subtle active state when JS checks the hidden checkbox, add a simple rule that JS can toggle by adding a class to .camera-controls (keeps CSS-only minimal) */
 .camera-controls.active .camera-btn { box-shadow: 0 0 6px rgba(16,185,129,0.18); }
+
+/* Inline camera controls that sit next to signal text in header */
+.camera-controls-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 8px;
+}
+.camera-controls-inline .camera-btn { width: 28px; height: 28px; font-size: 14px; }
+.camera-controls-inline .camera-select, .camera-controls-inline .camera-help { display: none; }
+.video-box:hover .camera-controls-inline .camera-select, .video-box:focus-within .camera-controls-inline .camera-select { display: inline-block; }
+.video-box:hover .camera-controls-inline .camera-help, .video-box:focus-within .camera-controls-inline .camera-help { display: inline-block; }
+
+/* spinner for stream loading */
+.stream-loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,0,0,0.5);
+    padding: 8px 12px;
+    border-radius: 8px;
+    z-index: 35;
+}
+.stream-loading .spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.12);
+    border-top-color: #7C3AED;
+    animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* expand-on-hover behavior for camera button */
+.camera-controls-inline {
+    transition: all 0.18s ease;
+}
+.camera-controls-inline .camera-btn {
+    transition: transform 0.14s ease, width 0.14s ease, height 0.14s ease, background 0.14s ease;
+}
+.camera-controls-inline:hover .camera-btn,
+.camera-controls-inline.active .camera-btn {
+    transform: scale(1.18);
+    width: 36px;
+    height: 36px;
+    background: rgba(59,130,246,0.12);
+}
+
+/* allow the expanded button to overlap the signal text when hovered */
+.camera-controls-inline:hover, .camera-controls-inline.active {
+    position: relative;
+    z-index: 45; /* above header content */
+}
+.camera-controls-inline:hover + .signal_status,
+.camera-controls-inline.active + .signal_status {
+    margin-left: 6px; /* small separation when expanded */
+}
 
 /* Compact toggle switch */
 .switch {
