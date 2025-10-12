@@ -113,13 +113,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ensure initial visibility state
     if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
     if (img) { img.style.display = 'none'; img.src = ''; }
-    // find parent controls container so we can toggle an active class for visuals
-    const controlsContainer = document.querySelector('.camera-controls');
+  // find parent controls container(s) so we can toggle an active class for visuals
+  const controlsContainer = document.querySelector('.camera-controls') || null;
+  const controlsInline = document.querySelector('.camera-controls-inline') || null;
 
     toggle.addEventListener('change', (ev) => {
       // sync active class for UI subtle reveal
       if (controlsContainer) {
         if (ev.target.checked) controlsContainer.classList.add('active'); else controlsContainer.classList.remove('active');
+      }
+      if (controlsInline) {
+        if (ev.target.checked) controlsInline.classList.add('active'); else controlsInline.classList.remove('active');
       }
       const on = ev.target.checked;
       if (on) {
@@ -133,12 +137,63 @@ document.addEventListener("DOMContentLoaded", () => {
           .then(r => r.json())
           .then((res) => {
             if (res.ok) {
-              // hide and pause file video to ensure only camera runs
-              if (fileVid) { try { fileVid.pause(); } catch(e){}; fileVid.style.display = 'none'; }
+              // show loading indicator and wait until the image actually loads
+              const loadingEl = document.getElementById('stream-loading-lane4');
+              if (loadingEl) loadingEl.classList.remove('hidden');
+
+              // don't hide the file video until the camera stream has confirmed a first frame
+              let fallbackTimer = null;
+              let resolved = false;
+              const onLoad = () => {
+                if (resolved) return; resolved = true;
+                if (loadingEl) loadingEl.classList.add('hidden');
+                // hide and pause file video only after camera first frame
+                if (fileVid) { try { fileVid.pause(); } catch(e){}; fileVid.style.display = 'none'; }
+                try { img.style.display = 'block'; } catch(e){}
+                startOverlayPolling('road4');
+                camHelp.textContent = 'Camera live';
+                // cleanup
+                try { img.removeEventListener('load', onLoad); img.removeEventListener('error', onError); } catch(e){}
+                if (fallbackTimer) clearTimeout(fallbackTimer);
+                if (poller) clearInterval(poller);
+              };
+              const onError = () => {
+                if (resolved) return; resolved = true;
+                if (loadingEl) loadingEl.classList.add('hidden');
+                camHelp.textContent = 'Camera error';
+                toggle.checked = false;
+                try { img.src = ''; img.style.display = 'none'; } catch(e){}
+                if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
+                try { img.removeEventListener('load', onLoad); img.removeEventListener('error', onError); } catch(e){}
+                if (fallbackTimer) clearTimeout(fallbackTimer);
+                if (poller) clearInterval(poller);
+              };
+
+              img.addEventListener('load', onLoad);
+              img.addEventListener('error', onError);
+              // set src after adding handlers
               img.src = `${BASE_URL}/raw-stream/road4`;
-              img.style.display = 'block';
-              startOverlayPolling('road4');
-              camHelp.textContent = 'Camera live';
+
+              // Some MJPEG servers don't fire a quick 'load' for the first frame; poll naturalWidth too
+              const poller = setInterval(() => {
+                try {
+                  if (img && img.naturalWidth && img.naturalWidth > 8) {
+                    onLoad();
+                  }
+                } catch (e) {}
+              }, 250);
+
+              // fallback: if no frame/timeout, revert to file video and notify user
+              fallbackTimer = setTimeout(() => {
+                if (resolved) return;
+                try { img.removeEventListener('load', onLoad); img.removeEventListener('error', onError); } catch(e){}
+                if (poller) clearInterval(poller);
+                if (loadingEl) loadingEl.classList.add('hidden');
+                camHelp.textContent = 'Camera unavailable';
+                toggle.checked = false;
+                try { img.src = ''; img.style.display = 'none'; } catch(e){}
+                if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
+              }, 6000);
             } else {
               console.error('switch-source failed', res);
               toggle.checked = false;
@@ -152,13 +207,16 @@ document.addEventListener("DOMContentLoaded", () => {
           .then(r => r.json())
           .then((res) => {
             if (res.ok) {
-              // stop camera image polling and hide it
-              stopOverlayPolling();
-              if (img) { img.src = ''; img.style.display = 'none'; }
-              // show and play file video
-              if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
-              camHelp.textContent = 'File playback';
-            } else {
+                  // stop camera image polling and hide it
+                  stopOverlayPolling();
+                  // hide loading spinner if present
+                  const loadingEl = document.getElementById('stream-loading-lane4');
+                  if (loadingEl) loadingEl.classList.add('hidden');
+                  if (img) { img.src = ''; img.style.display = 'none'; }
+                  // show and play file video
+                  if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
+                  camHelp.textContent = 'File playback';
+                } else {
               console.error('switch-source failed', res);
               toggle.checked = true;
             }
