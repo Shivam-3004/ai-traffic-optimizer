@@ -5,7 +5,7 @@ console.log("✅ Dashboard script loaded");
 const BASE_URL = "http://127.0.0.1:5000"; // Flask backend
 const VEHICLE_API = `${BASE_URL}/vehicle-count`;
 const SIGNAL_API = `${BASE_URL}/signal-status`;
-const REFRESH_INTERVAL = 3000; // refresh every 3 sec
+const REFRESH_INTERVAL = 1000; // refresh every 1 sec
 const OVERLAY_DETECT_INTERVAL = 350; // ms, should match server DETECT_INTERVAL roughly
 
 // ---------------- DOM ELEMENTS ----------------
