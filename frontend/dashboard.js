@@ -111,124 +111,116 @@ document.addEventListener("DOMContentLoaded", () => {
   }).catch(() => { camHelp.textContent = 'Unable to list cameras'; });
   if (toggle) {
     // Ensure initial visibility state
-    if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
-    if (img) { img.style.display = 'none'; img.src = ''; }
-  // find parent controls container(s) so we can toggle an active class for visuals
-  const controlsContainer = document.querySelector('.camera-controls') || null;
-  const controlsInline = document.querySelector('.camera-controls-inline') || null;
+    if (fileVid) { fileVid.style.display = 'block'; fileVid.play().catch(()=>{}); }
+    if (img) { img.classList.add('hidden'); img.src = ''; }
+
+    // helper to show/hide loading spinner
+    const showLoading = (show) => {
+      const loader = document.getElementById('stream-loading-lane4');
+      if (!loader) return;
+      if (show) loader.classList.remove('hidden'); else loader.classList.add('hidden');
+    }
+
+    // snapshot fallback timer (poll /snapshot if MJPEG doesn't start)
+    let _snapshotTimer = null;
+    let _mjpegTimeout = null;
+    const MJPEG_START_TIMEOUT = 2500; // ms to wait for mjpeg image to load
+    const SNAPSHOT_POLL_INTERVAL = 1200; // ms between snapshot polls when fallback engaged
+
+    function startSnapshotFallback() {
+      stopSnapshotFallback();
+      _snapshotTimer = setInterval(async () => {
+        try {
+          const resp = await fetch(`${BASE_URL}/snapshot/road4`);
+          if (!resp.ok) return;
+          const blob = await resp.blob();
+          const url = URL.createObjectURL(blob);
+          // show snapshot in the img element
+          img.src = url;
+          // revoke object URL after some time to avoid leaks
+          setTimeout(() => { try { URL.revokeObjectURL(url); } catch(e){} }, 5000);
+        } catch (e) {
+          // ignore
+        }
+      }, SNAPSHOT_POLL_INTERVAL);
+    }
+    function stopSnapshotFallback() {
+      if (_snapshotTimer) { clearInterval(_snapshotTimer); _snapshotTimer = null; }
+    }
+
+    // when the img receives its first natural frame, stop the fallback and hide loader
+    if (img) {
+      img.addEventListener('load', () => {
+        // naturalWidth is >0 when actual image data arrived
+        if (img.naturalWidth && img.naturalWidth > 0) {
+          img.classList.remove('hidden');
+          showLoading(false);
+          stopSnapshotFallback();
+          if (_mjpegTimeout) { clearTimeout(_mjpegTimeout); _mjpegTimeout = null; }
+        }
+      });
+    }
 
     toggle.addEventListener('change', (ev) => {
-      // sync active class for UI subtle reveal
-      if (controlsContainer) {
-        if (ev.target.checked) controlsContainer.classList.add('active'); else controlsContainer.classList.remove('active');
-      }
-      if (controlsInline) {
-        if (ev.target.checked) controlsInline.classList.add('active'); else controlsInline.classList.remove('active');
-      }
       const on = ev.target.checked;
       if (on) {
-        // ask server to switch source to camera first
         // ask server to switch source to camera first, include selected index
         const idx = camSelect ? camSelect.value : undefined;
         const url = idx ? `${BASE_URL}/switch-source?road=road4&mode=camera&index=${idx}` : `${BASE_URL}/switch-source?road=road4&mode=camera`;
-        // show a quick status while switching
         camHelp.textContent = 'Switching to camera...';
+        showLoading(true);
         fetch(url, { method: 'GET' })
           .then(r => r.json())
           .then((res) => {
             if (res.ok) {
-              // show loading indicator and wait until the image actually loads
-              const loadingEl = document.getElementById('stream-loading-lane4');
-              if (loadingEl) loadingEl.classList.remove('hidden');
-
-              // don't hide the file video until the camera stream has confirmed a first frame
-              let fallbackTimer = null;
-              let resolved = false;
-              const onLoad = () => {
-                if (resolved) return; resolved = true;
-                if (loadingEl) loadingEl.classList.add('hidden');
-                // hide and pause file video only after camera first frame
-                if (fileVid) { try { fileVid.pause(); } catch(e){}; fileVid.style.display = 'none'; }
-                try { img.style.display = 'block'; } catch(e){}
-                startOverlayPolling('road4');
-                camHelp.textContent = 'Camera live';
-                // cleanup
-                try { img.removeEventListener('load', onLoad); img.removeEventListener('error', onError); } catch(e){}
-                if (fallbackTimer) clearTimeout(fallbackTimer);
-                if (poller) clearInterval(poller);
-              };
-              const onError = () => {
-                if (resolved) return; resolved = true;
-                if (loadingEl) loadingEl.classList.add('hidden');
-                camHelp.textContent = 'Camera error';
-                toggle.checked = false;
-                try { img.src = ''; img.style.display = 'none'; } catch(e){}
-                if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
-                try { img.removeEventListener('load', onLoad); img.removeEventListener('error', onError); } catch(e){}
-                if (fallbackTimer) clearTimeout(fallbackTimer);
-                if (poller) clearInterval(poller);
-              };
-
-              img.addEventListener('load', onLoad);
-              img.addEventListener('error', onError);
-              // set src after adding handlers
+              // hide and pause file video to ensure only camera runs
+              if (fileVid) { try { fileVid.pause(); } catch(e){}; fileVid.style.display = 'none'; }
+              // set the MJPEG src; the image will become visible once frames arrive
               img.src = `${BASE_URL}/raw-stream/road4`;
-
-              // Some MJPEG servers don't fire a quick 'load' for the first frame; poll naturalWidth too
-              const poller = setInterval(() => {
-                try {
-                  if (img && img.naturalWidth && img.naturalWidth > 8) {
-                    onLoad();
-                  }
-                } catch (e) {}
-              }, 250);
-
-              // fallback: if no frame/timeout, revert to file video and notify user
-              fallbackTimer = setTimeout(() => {
-                if (resolved) return;
-                try { img.removeEventListener('load', onLoad); img.removeEventListener('error', onError); } catch(e){}
-                if (poller) clearInterval(poller);
-                if (loadingEl) loadingEl.classList.add('hidden');
-                camHelp.textContent = 'Camera unavailable';
-                toggle.checked = false;
-                try { img.src = ''; img.style.display = 'none'; } catch(e){}
-                if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
-              }, 6000);
+              img.classList.remove('hidden');
+              // start overlay polling and a timeout for mjpeg start
+              startOverlayPolling('road4');
+              camHelp.textContent = 'Camera live';
+              // if no frame arrives within MJPEG_START_TIMEOUT, start snapshot fallback
+              _mjpegTimeout = setTimeout(() => {
+                // if img hasn't received a naturalWidth yet, start fallback
+                if (!img.naturalWidth || img.naturalWidth === 0) {
+                  startSnapshotFallback();
+                  camHelp.textContent = 'Using snapshot fallback';
+                }
+                showLoading(false);
+              }, MJPEG_START_TIMEOUT);
             } else {
               console.error('switch-source failed', res);
               toggle.checked = false;
+              showLoading(false);
             }
-          }).catch((e) => { console.error(e); toggle.checked = false; });
+          }).catch((e) => { console.error(e); toggle.checked = false; showLoading(false); });
       } else {
         // switch back to file: ask server to create file-based manager and release camera
-        // switch back to file: ask server to create file-based manager and release camera
         camHelp.textContent = 'Switching to file...';
+        showLoading(true);
         fetch(`${BASE_URL}/switch-source?road=road4&mode=file`, { method: 'GET' })
           .then(r => r.json())
           .then((res) => {
             if (res.ok) {
-                  // stop camera image polling and hide it
-                  stopOverlayPolling();
-                  // hide loading spinner if present
-                  const loadingEl = document.getElementById('stream-loading-lane4');
-                  if (loadingEl) loadingEl.classList.add('hidden');
-                  if (img) { img.src = ''; img.style.display = 'none'; }
-                  // show and play file video
-                  if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
-                  camHelp.textContent = 'File playback';
-                } else {
+              // stop camera image polling and hide it
+              stopOverlayPolling();
+              stopSnapshotFallback();
+              if (img) { img.src = ''; img.classList.add('hidden'); }
+              // show and play file video
+              if (fileVid) { fileVid.style.display = 'block'; try { fileVid.play().catch(()=>{}); } catch(e){} }
+              camHelp.textContent = 'File playback';
+            } else {
               console.error('switch-source failed', res);
               toggle.checked = true;
             }
-          }).catch((e) => { console.error(e); toggle.checked = true; });
+            showLoading(false);
+          }).catch((e) => { console.error(e); toggle.checked = true; showLoading(false); });
       }
     });
     // default: leave file video visible; toggle off
     toggle.checked = false;
-    // ensure file videos attempt playback after DOM load (help with autoplay policies)
-    try {
-      document.querySelectorAll('video').forEach(v => { v.muted = true; v.playsInline = true; v.play().catch(()=>{}); });
-    } catch (e) {}
   }
 });
 
@@ -305,4 +297,12 @@ function stopOverlayPolling() {
     clearInterval(_overlayTimer);
     _overlayTimer = null;
   }
+  // also clear overlay canvas content so stale boxes don't remain
+  try {
+    const canvas = document.getElementById('overlay-lane4');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width || 1, canvas.height || 1);
+    }
+  } catch (e) {}
 }

@@ -177,7 +177,7 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none; /* don't block clicks */
-    z-index: 5; /* keep it above the video but below UI controls */
+    z-index: 30; /* ensure overlay is above the video/image */
 }
 
 /* Camera control strip */

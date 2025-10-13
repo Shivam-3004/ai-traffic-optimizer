@@ -29,7 +29,7 @@ Behavioral contract (API outputs):
 from flask import Flask, jsonify
 from flask_cors import CORS
 from backend.video_input.video_common import get_stream_managers
-from backend.detection.vehicle_counter import detect_vehicles, draw_detections_on_frame
+from backend.detection.vehicle_counter import detect_vehicles, draw_detections_on_frame, create_trackers, update_trackers
 from backend.logic.signal_controller import decide_signal
 from backend.detection.model_utils import vehicle_weights
 from ultralytics import YOLO
@@ -86,64 +86,124 @@ PHASE_LOCK = threading.Lock()
 # Lightweight detection cache for live overlay (run for live camera road(s))
 _DETECTION_CACHE = {}  # road -> {boxes: [...], width: int, height: int, ts: float}
 _DETECTION_LOCK = threading.Lock()
-_DETECT_THREAD = None
-_DETECT_RUNNING = True
+# per-road detection threads & running flags
+_DETECT_THREADS = {}  # road -> Thread
+_DETECT_RUNNING = {}  # road -> bool
+_DETECT_THREAD_LOCK = threading.Lock()
 _INFERENCE_LOCK = threading.Lock()
-DETECT_INTERVAL = 0.35  # seconds between detections for overlay
+DETECT_INTERVAL = 1.0  # seconds between detections for overlay (lower frequency -> lower CPU)
+INFERENCE_RESIZE_WIDTH = 480  # resize frames for inference to reduce CPU (keep <= 640)
+STREAM_FPS = 15
+STREAM_INTERVAL = 1.0 / float(STREAM_FPS)
+
+# trackers per road for smoother boxes between detections
+_TRACKERS = {}  # road -> list of (tracker, class_name)
+_TRACKERS_LOCK = threading.Lock()
 
 
 def _detection_worker(road, manager):
-    """Run detection periodically on frames from manager and cache box coords."""
-    global _DETECT_RUNNING
-    while _DETECT_RUNNING:
-        try:
+    """Run detection periodically on frames from manager and cache box coords.
+
+    This worker resizes frames for inference to reduce CPU, scales boxes back to
+    original frame coordinates, converts xywh(center) -> xy(top-left), and
+    stores them in _DETECTION_CACHE for other endpoints (raw_stream, detection_boxes).
+    """
+    try:
+        while _DETECT_RUNNING.get(road, False):
             frame = manager.next_frame()
             if frame is None:
                 time.sleep(0.05)
                 continue
 
-            # run detection (serialize access to model)
+            # perform resized inference to save CPU
             try:
                 with _INFERENCE_LOCK:
-                    dets = detect_vehicles(frame, model) or []
+                    # resize if wider than target
+                    h, w = frame.shape[:2]
+                    scale = 1.0
+                    resized = frame
+                    if w > INFERENCE_RESIZE_WIDTH:
+                        scale = INFERENCE_RESIZE_WIDTH / float(w)
+                        resized = cv2.resize(frame, (int(w * scale), int(h * scale)))
+                    dets = detect_vehicles(resized, model) or []
             except Exception:
                 dets = []
 
-            # try to get frame size
+            # scale detections back to original size and convert centers -> top-left
+            boxes = []
             try:
                 h, w = frame.shape[:2]
             except Exception:
-                w, h = None, None
+                w = None; h = None
 
-            # normalize boxes as dicts
-            boxes = []
             for d in dets:
                 try:
                     if len(d) >= 5:
-                        x, y, ww, hh, cls = d[0], d[1], d[2], d[3], d[4]
-                    else:
-                        continue
-                    boxes.append({"x": float(x), "y": float(y), "w": float(ww), "h": float(hh), "class": str(cls)})
+                        x_c, y_c, bw, bh, cls = float(d[0]), float(d[1]), float(d[2]), float(d[3]), str(d[4])
+                        # scale up
+                        if scale != 1.0:
+                            x_c = x_c / scale
+                            y_c = y_c / scale
+                            bw = bw / scale
+                            bh = bh / scale
+                        # convert center->top-left
+                        x_t = x_c - (bw / 2.0)
+                        y_t = y_c - (bh / 2.0)
+                        boxes.append({"x": float(x_t), "y": float(y_t), "w": float(bw), "h": float(bh), "class": cls})
                 except Exception:
                     continue
+
+            # create lightweight trackers for smoother updates between detections
+            try:
+                trackers = create_trackers(frame, [(b['x'], b['y'], b['w'], b['h'], b.get('class', '')) for b in boxes])
+                with _TRACKERS_LOCK:
+                    _TRACKERS[road] = trackers
+            except Exception:
+                pass
 
             with _DETECTION_LOCK:
                 _DETECTION_CACHE[road] = {"boxes": boxes, "width": w, "height": h, "ts": time.time()}
 
             time.sleep(DETECT_INTERVAL)
-        except Exception:
-            time.sleep(0.1)
+    except Exception:
+        # ensure any unexpected worker exception doesn't kill the process
+        return
 
 
 def start_detection_for_road(road):
-    global _DETECT_THREAD
+    """Start a background detection worker for a specific road (idempotent)."""
     manager = STREAM_MANAGERS.get(road)
     if manager is None:
         return
-    if _DETECT_THREAD is not None and _DETECT_THREAD.is_alive():
-        return
-    _DETECT_THREAD = threading.Thread(target=_detection_worker, args=(road, manager), daemon=True)
-    _DETECT_THREAD.start()
+    with _DETECT_THREAD_LOCK:
+        if _DETECT_RUNNING.get(road):
+            return
+        _DETECT_RUNNING[road] = True
+        th = threading.Thread(target=_detection_worker, args=(road, manager), daemon=True)
+        _DETECT_THREADS[road] = th
+        th.start()
+
+
+def stop_detection_for_road(road):
+    """Stop the background detection worker for a specific road."""
+    with _DETECT_THREAD_LOCK:
+        _DETECT_RUNNING[road] = False
+        th = _DETECT_THREADS.get(road)
+        if th and th.is_alive():
+            try:
+                th.join(timeout=1.0)
+            except Exception:
+                pass
+        _DETECT_THREADS.pop(road, None)
+        # remove cached detection for road to avoid stale boxes
+        with _DETECTION_LOCK:
+            _DETECTION_CACHE.pop(road, None)
+        # remove trackers for this road as well
+        try:
+            with _TRACKERS_LOCK:
+                _TRACKERS.pop(road, None)
+        except Exception:
+            pass
 
 
 def stop_detection():
@@ -332,20 +392,58 @@ def raw_stream(road):
                         time.sleep(0.05)
                         continue
 
-                    # perform one-shot detection (protect model with _INFERENCE_LOCK)
-                    try:
-                        with _INFERENCE_LOCK:
-                            dets = detect_vehicles(frame, model) if model is not None else []
-                    except Exception:
-                        dets = []
 
-                    # draw boxes onto a copy
+                    # Prefer: trackers -> cached detections -> on-demand inference
+                    dets = None
+                    dets_from_inference = False
+                    # 1) trackers
                     try:
+                        with _TRACKERS_LOCK:
+                            trackers = _TRACKERS.get(road)
+                        if trackers:
+                            boxes, new_trackers = update_trackers(frame, trackers)
+                            with _TRACKERS_LOCK:
+                                _TRACKERS[road] = new_trackers
+                            if boxes:
+                                dets = boxes
+                    except Exception:
+                        dets = None
+
+                    # 2) cached detections
+                    if dets is None:
+                        with _DETECTION_LOCK:
+                            entry = _DETECTION_CACHE.get(road)
+                            if entry and entry.get('boxes'):
+                                dets = [(b['x'], b['y'], b['w'], b['h'], b.get('class', '')) for b in entry['boxes']]
+
+                    # 3) on-demand inference
+                    if dets is None:
+                        try:
+                            with _INFERENCE_LOCK:
+                                dets = detect_vehicles(frame, model) if model is not None else []
+                                dets_from_inference = True
+                        except Exception:
+                            dets = []
+
+                    # If dets were produced by the model they are center-based xywh;
+                    # convert to top-left x,y before drawing.
+                    try:
+                        if dets_from_inference and dets:
+                            conv = []
+                            for d in dets:
+                                if len(d) >= 5:
+                                    cx, cy, bw, bh, cls = float(d[0]), float(d[1]), float(d[2]), float(d[3]), d[4]
+                                    x = cx - (bw / 2.0)
+                                    y = cy - (bh / 2.0)
+                                    conv.append((x, y, bw, bh, cls))
+                            dets = conv
+
                         annotated = draw_detections_on_frame(frame, dets) or frame
                     except Exception:
                         annotated = frame
 
-                    ret, buf = cv2.imencode('.jpg', annotated)
+                    # encode with moderate quality to reduce CPU/bandwidth and improve frame rate
+                    ret, buf = cv2.imencode('.jpg', annotated, [int(cv2.IMWRITE_JPEG_QUALITY), 70])
                     if not ret:
                         time.sleep(0.02)
                         continue
@@ -354,7 +452,8 @@ def raw_stream(road):
                     yield b"Content-Type: image/jpeg\r\n"
                     yield f"Content-Length: {len(jpeg)}\r\n\r\n".encode('utf-8')
                     yield jpeg + b"\r\n"
-                    time.sleep(DETECT_INTERVAL)
+                    # throttle MJPEG generation to STREAM_FPS for smooth client rendering
+                    time.sleep(STREAM_INTERVAL)
                 except GeneratorExit:
                     break
                 except Exception:
@@ -416,9 +515,23 @@ def switch_source():
                 return jsonify({'error': f'video file for {road} not found'}), 404
 
         try:
-            STREAM_MANAGERS[road] = VideoStreamManager(src)
+            # for camera sources prefer a slightly higher background reader FPS for smoothness
+            if mode == 'camera' and isinstance(src, int):
+                STREAM_MANAGERS[road] = VideoStreamManager(src, max_fps=20.0)
+            else:
+                STREAM_MANAGERS[road] = VideoStreamManager(src)
         except Exception as e:
             return jsonify({'error': str(e)}), 500
+
+        # if switching to camera mode, start background detection for this road to
+        # provide low-latency cached boxes; if switching to file mode, stop camera worker
+        try:
+            if mode == 'camera':
+                start_detection_for_road(road)
+            else:
+                stop_detection_for_road(road)
+        except Exception:
+            pass
 
         return jsonify({'ok': True, 'road': road, 'mode': mode, 'source': str(src)})
     except Exception as e:
@@ -465,11 +578,10 @@ def detection_boxes(road):
     returned. Otherwise a one-shot detection is performed on the latest frame.
     """
     try:
-        if BACKGROUND_DET:
-            with _DETECTION_LOCK:
-                entry = _DETECTION_CACHE.get(road)
-                if not entry:
-                    return jsonify({"boxes": [], "width": None, "height": None, "ts": None})
+        # prefer cached entries if available (background worker or recently populated)
+        with _DETECTION_LOCK:
+            entry = _DETECTION_CACHE.get(road)
+            if entry:
                 return jsonify(entry)
 
         # one-shot detection path
@@ -491,8 +603,15 @@ def detection_boxes(road):
         h, w = frame.shape[:2]
         for d in dets:
             if len(d) >= 5:
-                x, y, bw, bh, cls = d[0], d[1], d[2], d[3], d[4]
-                boxes.append({"x": float(x), "y": float(y), "w": float(bw), "h": float(bh), "class": str(cls)})
+                # convert center-based xywh -> top-left for client overlay consistency
+                cx, cy, bw, bh, cls = float(d[0]), float(d[1]), float(d[2]), float(d[3]), str(d[4])
+                x = cx - (bw / 2.0)
+                y = cy - (bh / 2.0)
+                boxes.append({"x": float(x), "y": float(y), "w": float(bw), "h": float(bh), "class": cls})
+
+        # cache this result briefly so raw_stream can use it when running
+        with _DETECTION_LOCK:
+            _DETECTION_CACHE[road] = {"boxes": boxes, "width": int(w), "height": int(h), "ts": time.time()}
 
         return jsonify({"boxes": boxes, "width": int(w), "height": int(h), "ts": time.time()})
     except Exception as e:
