@@ -1,39 +1,111 @@
-# ------------------------------------------------------------
-# File: run.py
-# Project: AI Traffic Light Optimizer
-# Role: Integration Testing by Shivam Paliwal
-# Purpose: Run detection → lane-wise counting → signal decision using video input
-# ------------------------------------------------------------
+# """
+# run.py — convenience launcher
+#
+# When executed this script will:
+#  - start the Flask backend (backend/api/app.py) as a subprocess
+#  - serve the `frontend/` directory using Python's built-in HTTP server
+#  - open the dashboard in the default browser
+#  - cleanly shut down both services on Ctrl+C
+#
+# This is intended as a convenience developer workflow only.
+# """
 
-from backend.video_input.video_common import VIDEO_PATHS, get_sampled_frames  # ✅ Centralized video logic
-from backend.detection.vehicle_counter import detect_vehicles              # Member 1
-from backend.logic.signal_controller import decide_signal                  # Member 2
+import sys
+import os
+import subprocess
+import threading
+import time
+import webbrowser
+from http.server import SimpleHTTPRequestHandler
+import socketserver
+import functools
 
-# ------------------------------------------------------------
-# Step 1: Detect vehicles per lane using video frames
-# ------------------------------------------------------------
-lane_counts = {}
-from ultralytics import YOLO
-model = YOLO("backend/detection/models/best.pt")
-for lane, path in VIDEO_PATHS.items():
+
+ROOT = os.path.abspath(os.path.dirname(__file__))
+FRONTEND_DIR = os.path.join(ROOT, 'frontend')
+FRONTEND_PORT = 8000
+
+
+def start_frontend_server(directory, port):
+    # run a simple static HTTP server that serves files from `directory`
+    # use functools.partial to pass directory to handler (avoids changing CWD)
+    handler = functools.partial(SimpleHTTPRequestHandler, directory=directory)
+
+    class ReuseTCPServer(socketserver.TCPServer):
+        allow_reuse_address = True
+
+    httpd = ReuseTCPServer(("", port), handler)
+
+    def serve():
+        try:
+            httpd.serve_forever()
+        except Exception:
+            pass
+
+    th = threading.Thread(target=serve, daemon=True)
+    th.start()
+    return httpd, th
+
+
+def start_backend(python_exe=sys.executable):
+    # start the backend Flask app as a subprocess (python -m backend.api.app)
+    cmd = [python_exe, '-m', 'backend.api.app']
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=ROOT, text=True)
+    return proc
+
+
+def stream_process_output(proc):
     try:
-        frames = get_sampled_frames(path, num_frames=5, stride=30)
-        total_detected = 0
-        for frame in frames:
-            boxes = detect_vehicles(frame, model)
-            total_detected += len(boxes)
-        lane_counts[lane] = int(total_detected / max(1, len(frames)))
-    except Exception as e:
-        lane_counts[lane] = 0
-        print(f"[Error] {lane}: {str(e)}")
+        for line in proc.stdout:
+            print(line, end='')
+    except Exception:
+        pass
 
-# ------------------------------------------------------------
-# Step 2: Decide which lane gets green signal
-# ------------------------------------------------------------
-signal = decide_signal(lane_counts)
 
-# ------------------------------------------------------------
-# Step 3: Output results
-# ------------------------------------------------------------
-print("✅ Vehicle Counts per Lane:", lane_counts)
-print("🚦 Signal Decision:", signal)
+def main():
+    print('Starting frontend server (serving repository root on port', FRONTEND_PORT, ')')
+    if not os.path.isdir(FRONTEND_DIR):
+        print('Error: frontend directory not found at', FRONTEND_DIR)
+        return
+
+    # serve from repository root so relative paths like ../backend/... resolve
+    httpd, th = start_frontend_server(ROOT, FRONTEND_PORT)
+
+    print('Starting backend (Flask)')
+    backend_proc = start_backend()
+    out_thread = threading.Thread(target=stream_process_output, args=(backend_proc,), daemon=True)
+    out_thread.start()
+
+    dashboard_url = f'http://127.0.0.1:{FRONTEND_PORT}/frontend/dashboard.html'
+    print('Opening dashboard at', dashboard_url)
+    try:
+        webbrowser.open(dashboard_url)
+    except Exception:
+        pass
+
+    try:
+        while True:
+            time.sleep(0.5)
+            if backend_proc.poll() is not None:
+                print('Backend process exited with code', backend_proc.returncode)
+                break
+    except KeyboardInterrupt:
+        print('Shutting down (KeyboardInterrupt)')
+    finally:
+        print('Stopping frontend server...')
+        try:
+            httpd.shutdown()
+        except Exception:
+            pass
+        print('Stopping backend process...')
+        try:
+            backend_proc.terminate()
+            time.sleep(0.5)
+            if backend_proc.poll() is None:
+                backend_proc.kill()
+        except Exception:
+            pass
+
+
+if __name__ == '__main__':
+    main()
