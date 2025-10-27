@@ -99,6 +99,64 @@ STREAM_INTERVAL = 1.0 / float(STREAM_FPS)
 # trackers per road for smoother boxes between detections
 _TRACKERS = {}  # road -> list of (tracker, class_name)
 _TRACKERS_LOCK = threading.Lock()
+_TRACKER_THREADS = {}
+_TRACKER_RUNNING = {}
+_TRACKER_THREAD_LOCK = threading.Lock()
+TRACKER_FPS = 20
+TRACKER_INTERVAL = 1.0 / float(TRACKER_FPS)
+
+def _tracker_worker(road, manager):
+    """Update trackers at a higher frequency to produce smooth boxes between detections."""
+    try:
+        while _TRACKER_RUNNING.get(road, False):
+            frame = manager.next_frame()
+            if frame is None:
+                time.sleep(0.01)
+                continue
+            try:
+                with _TRACKERS_LOCK:
+                    trackers = _TRACKERS.get(road)
+                if not trackers:
+                    time.sleep(TRACKER_INTERVAL)
+                    continue
+                boxes, new_trackers = update_trackers(frame, trackers)
+                with _TRACKERS_LOCK:
+                    _TRACKERS[road] = new_trackers
+                # write boxes into detection cache so clients can poll them
+                try:
+                    h, w = frame.shape[:2]
+                except Exception:
+                    w = None; h = None
+                with _DETECTION_LOCK:
+                    _DETECTION_CACHE[road] = {"boxes": [{"x": float(b[0]), "y": float(b[1]), "w": float(b[2]), "h": float(b[3]), "class": b[4] if len(b) > 4 else ''} for b in boxes], "width": w, "height": h, "ts": time.time()}
+            except Exception:
+                pass
+            time.sleep(TRACKER_INTERVAL)
+    except Exception:
+        return
+
+def start_tracker_for_road(road):
+    manager = STREAM_MANAGERS.get(road)
+    if manager is None:
+        return
+    with _TRACKER_THREAD_LOCK:
+        if _TRACKER_RUNNING.get(road):
+            return
+        _TRACKER_RUNNING[road] = True
+        th = threading.Thread(target=_tracker_worker, args=(road, manager), daemon=True)
+        _TRACKER_THREADS[road] = th
+        th.start()
+
+def stop_tracker_for_road(road):
+    with _TRACKER_THREAD_LOCK:
+        _TRACKER_RUNNING[road] = False
+        th = _TRACKER_THREADS.get(road)
+        if th and th.is_alive():
+            try:
+                th.join(timeout=0.5)
+            except Exception:
+                pass
+        _TRACKER_THREADS.pop(road, None)
 
 
 def _detection_worker(road, manager):
@@ -182,6 +240,11 @@ def start_detection_for_road(road):
         th = threading.Thread(target=_detection_worker, args=(road, manager), daemon=True)
         _DETECT_THREADS[road] = th
         th.start()
+        # also start lightweight tracker updater for smoother boxes
+        try:
+            start_tracker_for_road(road)
+        except Exception:
+            pass
 
 
 def stop_detection_for_road(road):
@@ -198,7 +261,11 @@ def stop_detection_for_road(road):
         # remove cached detection for road to avoid stale boxes
         with _DETECTION_LOCK:
             _DETECTION_CACHE.pop(road, None)
-        # remove trackers for this road as well
+        # remove trackers for this road as well and stop tracker thread
+        try:
+            stop_tracker_for_road(road)
+        except Exception:
+            pass
         try:
             with _TRACKERS_LOCK:
                 _TRACKERS.pop(road, None)
@@ -393,57 +460,14 @@ def raw_stream(road):
                         continue
 
 
-                    # Prefer: trackers -> cached detections -> on-demand inference
-                    dets = None
-                    dets_from_inference = False
-                    # 1) trackers
+                    # Stream raw frames (no server-side drawing). Client overlays
+                    # will poll /detection-boxes which is updated by tracker worker.
                     try:
-                        with _TRACKERS_LOCK:
-                            trackers = _TRACKERS.get(road)
-                        if trackers:
-                            boxes, new_trackers = update_trackers(frame, trackers)
-                            with _TRACKERS_LOCK:
-                                _TRACKERS[road] = new_trackers
-                            if boxes:
-                                dets = boxes
-                    except Exception:
-                        dets = None
-
-                    # 2) cached detections
-                    if dets is None:
-                        with _DETECTION_LOCK:
-                            entry = _DETECTION_CACHE.get(road)
-                            if entry and entry.get('boxes'):
-                                dets = [(b['x'], b['y'], b['w'], b['h'], b.get('class', '')) for b in entry['boxes']]
-
-                    # 3) on-demand inference
-                    if dets is None:
-                        try:
-                            with _INFERENCE_LOCK:
-                                dets = detect_vehicles(frame, model) if model is not None else []
-                                dets_from_inference = True
-                        except Exception:
-                            dets = []
-
-                    # If dets were produced by the model they are center-based xywh;
-                    # convert to top-left x,y before drawing.
-                    try:
-                        if dets_from_inference and dets:
-                            conv = []
-                            for d in dets:
-                                if len(d) >= 5:
-                                    cx, cy, bw, bh, cls = float(d[0]), float(d[1]), float(d[2]), float(d[3]), d[4]
-                                    x = cx - (bw / 2.0)
-                                    y = cy - (bh / 2.0)
-                                    conv.append((x, y, bw, bh, cls))
-                            dets = conv
-
-                        annotated = draw_detections_on_frame(frame, dets) or frame
-                    except Exception:
                         annotated = frame
-
-                    # encode with moderate quality to reduce CPU/bandwidth and improve frame rate
-                    ret, buf = cv2.imencode('.jpg', annotated, [int(cv2.IMWRITE_JPEG_QUALITY), 70])
+                        ret, buf = cv2.imencode('.jpg', annotated, [int(cv2.IMWRITE_JPEG_QUALITY), 70])
+                    except Exception:
+                        time.sleep(0.02)
+                        continue
                     if not ret:
                         time.sleep(0.02)
                         continue

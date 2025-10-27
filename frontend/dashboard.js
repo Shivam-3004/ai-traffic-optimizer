@@ -6,7 +6,7 @@ const BASE_URL = "http://127.0.0.1:5000"; // Flask backend
 const VEHICLE_API = `${BASE_URL}/vehicle-count`;
 const SIGNAL_API = `${BASE_URL}/signal-status`;
 const REFRESH_INTERVAL = 1000; // refresh every 1 sec
-const OVERLAY_DETECT_INTERVAL = 350; // ms, should match server DETECT_INTERVAL roughly
+const OVERLAY_DETECT_INTERVAL = 100; // ms, poll often to update overlay smoothly (trackers update at ~20Hz)
 
 // ---------------- DOM ELEMENTS ----------------
 const roads = {
@@ -238,8 +238,9 @@ function startOverlayPolling(road) {
 
   function resizeCanvas() {
     // set internal pixel buffer to match displayed size
-    const w = img.clientWidth || img.width || 320;
-    const h = img.clientHeight || img.height || 240;
+    const rect = img.getBoundingClientRect();
+    const w = Math.max(1, Math.round(rect.width));
+    const h = Math.max(1, Math.round(rect.height));
     canvas.width = w;
     canvas.height = h;
     canvas.style.width = `${w}px`;

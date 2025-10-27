@@ -154,7 +154,7 @@ body {
     /* The HTML uses w-full h-full object-cover, which is fine, but this ensures a full fit */
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* avoid cropping, makes overlay scaling predictable */
 }
 
 /* Ensure video and img are on top of the canvas overlay to avoid being hidden */
